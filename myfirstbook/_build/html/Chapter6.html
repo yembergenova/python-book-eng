@@ -1,0 +1,1113 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Structures: Trees and Graphs &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter6';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter: Graph Traversals" href="Chapter7.html" />
+    <link rel="prev" title="Chapter: Arrays and Pointers" href="Chapter5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter6.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter6.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Structures: Trees and Graphs</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-intuition"><strong>1. Motivation/Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-binary-trees"><strong>2. Concept 1: Binary Trees</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition"><strong>2.1. Intuition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example"><strong>2.2. Example</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code"><strong>2.3. Code</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-graphs"><strong>3. Concept 2: Graphs</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>3.2. Example</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>3.3. Code</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems"><strong>4. LeetCode Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-maximum-depth-of-binary-tree"><strong>Problem 1: Maximum Depth of Binary Tree</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-find-if-path-exists-in-graph"><strong>Problem 2: Find if Path Exists in Graph</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-cycle-detection-in-directed-graph"><strong>Problem 3: Cycle Detection in Directed Graph</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>5. Conclusion</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-structures-trees-and-graphs">
+<h1><strong>Data Structures: Trees and Graphs</strong><a class="headerlink" href="#data-structures-trees-and-graphs" title="Link to this heading">#</a></h1>
+<section id="motivation-intuition">
+<h2><strong>1. Motivation/Intuition</strong><a class="headerlink" href="#motivation-intuition" title="Link to this heading">#</a></h2>
+<p>Trees and graphs are essential components in computing, providing structured methods to manage hierarchical relationships and connectivity within data. Trees are crucial for organizing data hierarchically, allowing for efficient operations like search, insert, and delete (Grossman, 2009). On the other hand, graphs are vital for modeling relationships and networks, such as social networks or transportation grids, offering insights into connectivity and reachability (Wang et al., 2021).</p>
+<p>In computer science, tree structures find extensive applications in various fields, including computational biology, pattern recognition, XML databases, and computer networks, showcasing their versatility and practicality (Chen et al., 2005). Additionally, graph representation learning focuses on representing vertices in a graph as low-dimensional vectors, aiding in network analysis and prediction tasks (Wang et al., 2021).</p>
+<p>The study of decision trees and systems of decision rules is significant in computer science, emphasizing the importance of understanding the relationships between different data structures (Durdymyradov &amp; Moshkov, 2023). Moreover, the computational complexity of graph-related problems sheds light on the intricacies involved in analyzing and manipulating tree structures (Bordewich &amp; Semple, 2005).</p>
+<p>Trees and graphs are foundational concepts in computing, providing structured frameworks for organizing data hierarchically and modeling complex relationships. Understanding these structures is crucial for efficiently addressing a wide range of computational problems.</p>
+</section>
+<section id="concept-1-binary-trees">
+<h2><strong>2. Concept 1: Binary Trees</strong><a class="headerlink" href="#concept-1-binary-trees" title="Link to this heading">#</a></h2>
+<section id="intuition">
+<h3><strong>2.1. Intuition</strong><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<p>Binary trees are a fundamental data structure in computer science, providing a simple yet powerful way to represent hierarchical relationships. They are widely used in various applications, including image processing, segmentation, information retrieval, and searching algorithms (Salembier &amp; Garrido, 2000; , Senhadji-Navarro &amp; Garcia-Vargas, 2018). Binary trees have also found applications in fields such as mathematics, combinatorics, and phylogenetic reconstruction (Li et al., 2019; , Broutin &amp; Devroye, 2006). The structure of binary trees allows for efficient representation and manipulation of data, making them essential in algorithm design and optimization (Adler &amp; Heeringa, 2011; , Magner et al., 2018).</p>
+<p><img alt="DALL·E 2024-05-15 15.12.00 - An informative and educational illustration depicting various applications of binary trees across different fields. The visual should show a large cen.webp" src="attachment:acfbbc96-495e-47f4-850c-ad920a1f7e5b.webp" /></p>
+<p>A binary tree is a discrete structure that consists of nodes, where each node contains a data element and references to up to two children, designated as the left child and the right child. This structure is a key element in various domains of computer science, providing an efficient means of organizing data hierarchically.</p>
+<p><strong>Definition and Properties</strong></p>
+<ol class="arabic simple">
+<li><p>Node: The basic unit of a binary tree. Each node comprises:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Data: An element of any data type (e.g., integer, string) that the node stores.</p></li>
+<li><p>Left Child: A reference to the left child node.</p></li>
+<li><p>Right Child: A reference to the right child node.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Root Node: The initial node from which all other nodes are accessible. The root node does not have a parent.</p></li>
+<li><p>Leaf Nodes: Nodes that do not have any children. They are the endpoints of the tree.</p></li>
+<li><p>Depth of a Node: The number of edges from the node to the tree’s root node.</p></li>
+<li><p>Height of a Node: The number of edges on the longest downward path between that node and a leaf. The height of the tree itself is the height of the root.</p></li>
+</ol>
+<p><strong>Types of Binary Trees</strong></p>
+<ul class="simple">
+<li><p>Full Binary Tree: Every node has either 0 or 2 children, but never one child alone.</p></li>
+<li><p>Complete Binary Tree: All levels are completely filled except possibly the last, which is filled from the left.</p></li>
+<li><p>Perfect Binary Tree: A complete binary tree in which all leaf nodes are at the same depth, and in which every parent has exactly two children.</p></li>
+<li><p>Balanced Binary Tree: A binary tree is balanced if the height of the left and right subtrees of any node differ by no more than one. This balance is crucial for maintaining efficient operations.</p></li>
+<li><p>Binary Search Tree (BST): A binary tree where for each node, the left subtree’s values are less than the node’s value, and the right subtree’s values are greater than the node’s value. BSTs support efficient data search, insertion, and deletion operations.</p></li>
+</ul>
+<p><img alt="DALL·E 2024-05-15 16.39.27 - A detailed educational illustration showing four types of binary trees_ Full, Complete, Perfect, and Balanced. Each tree should be labeled accordingly.webp" src="attachment:11eeb722-d9c7-4594-be13-5e7f848f4c3a.webp" /></p>
+<p><strong>Applications of Binary Trees</strong></p>
+<p>Binary trees are versatile structures used in numerous applications:</p>
+<ul class="simple">
+<li><p>Sorting and Searching: Binary search trees enable efficient searching akin to binary search in arrays, making them suitable for database indexing.</p></li>
+<li><p>Priority Queues: Binary trees are used in the implementation of priority queues, where operations are based on the priority of elements.</p></li>
+<li><p>Syntax Trees: Used in compilers to represent the syntactic structure of programming languages.</p></li>
+<li><p>Decision Processes: In machine learning, decision trees are used for classification and regression tasks.</p></li>
+</ul>
+<p><strong>Algorithmic Considerations</strong></p>
+<p>Operations such as insertion, deletion, and traversal (in-order, pre-order, post-order) in binary trees vary in complexity, generally depending on the tree’s height and structure. Ensuring efficient performance often involves maintaining tree balance through algorithms such as AVL or Red-Black trees.</p>
+<p>In the realm of image processing, binary partition trees have been leveraged as an efficient representation for tasks like image segmentation and information retrieval (Salembier &amp; Foucher, 2016). These trees offer a structured approach to organizing regions within an image, facilitating the extraction of meaningful information from complex visual data (Salembier &amp; Foucher, 2016). Furthermore, in the context of hyperspectral imaging, binary partition trees have been instrumental in image representation and processing, showcasing their versatility across different domains (Veganzones et al., 2014; , Valero et al., 2013).</p>
+<p>From a mathematical perspective, binary trees have been extensively studied, with research focusing on limit laws, random binary search trees, and functions of subtrees (Devroye, 1991; , Holmgren &amp; Janson, 2015; , Devroye, 2002). These studies delve into the statistical properties and behaviors of binary trees, shedding light on their probabilistic nature and providing insights into their structural characteristics. Moreover, the use of binary trees extends beyond computer science and mathematics, with applications in gene duplication analysis, classification algorithms, and compression techniques (Chen et al., 2000; , Jin &amp; Mo, 2013; , Radha et al., 1996).</p>
+<p>Overall, binary trees serve as a fundamental building block in various disciplines, offering a versatile and efficient means of organizing and processing data. Their simplicity, coupled with their wide-ranging applications, underscores their significance in both theoretical research and practical implementations.</p>
+</section>
+<section id="example">
+<h3><strong>2.2. Example</strong><a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>Consider organizing a set of numbers: 7, 5, 12, 3, 6, 9, 15 into a binary tree starting from the root (7) and inserting each subsequent number following the binary tree logic (smaller to the left, larger to the right).</p>
+</section>
+<section id="code">
+<h3><strong>2.3. Code</strong><a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<p>Here is the Python code to create and traverse a simple binary tree:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">key</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Node class: Represents a node in a binary tree.</p></li>
+<li><p><strong>init</strong> method: Initializes a node with a given value (key) and sets both left and right children to None.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">root</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Purpose: Inserts a new node with the specified key into the binary tree rooted at root.</p></li>
+<li><p>Recursive nature: The function recursively finds the correct position for the new key, maintaining the binary tree’s property (smaller keys on the left, larger keys on the right).</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">root</span><span class="o">.</span><span class="n">val</span><span class="p">]</span> <span class="o">+</span> <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="k">if</span> <span class="n">root</span> <span class="k">else</span> <span class="p">[]</span>
+
+<span class="c1"># Create root</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">insert</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Traverse tree</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inorder Traversal:&quot;</span><span class="p">,</span> <span class="n">inorder_traversal</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Inorder Traversal: [3, 5, 6, 7, 9, 12, 15]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Purpose: Performs an inorder traversal of the binary tree (visit left child, current node, then right child).</p></li>
+<li><p>Recursive structure: Combines the values in a list, which results in displaying all node values in ascending order.</p></li>
+</ul>
+<p>Visualization</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>matplotlib.pyplot is used for plotting graphs visually.</p></li>
+<li><p>networkx is employed to manage and visualize complex graphs. In this case, it’s used to represent the binary tree structure.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_edges</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">pos</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">layer</span>
+        <span class="n">add_edges</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">left</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">l</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">layer</span>
+        <span class="n">add_edges</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">right</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">layer</span><span class="o">=</span><span class="n">layer</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>graph is a DiGraph object from networkx, representing the tree.</p></li>
+<li><p>node refers to the current node in the recursive traversal.</p></li>
+<li><p>pos is a dictionary storing positions for each node for plotting. Each node’s value is used as a key.</p></li>
+<li><p>x and y are coordinates. x is adjusted based on the tree’s depth (layer), making sure children don’t overlap visually.</p></li>
+<li><p>Recursive Calls: The function calls itself for the left and right children of the current node, positioning them increasingly further from the parent as the depth increases, which helps in avoiding overlaps and maintaining a clear structure.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_binary_tree</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">add_edges</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">arrows</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Binary Tree Visualization&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># Assuming the rest of your code is already defined</span>
+<span class="n">draw_binary_tree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7b9fedbaf36fcaf72141e6de77bd25a1e86453fe1951593502917bbf3a7046e9.png" src="_images/7b9fedbaf36fcaf72141e6de77bd25a1e86453fe1951593502917bbf3a7046e9.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>graph: A new directed graph is created where each node points to its children, reflecting the structure of a binary tree.</p></li>
+<li><p>pos: An empty dictionary that add_edges will fill with positions for each node based on their hierarchical relationship.</p></li>
+<li><p>nx.draw: Draws the graph using the positions calculated. Nodes are labeled with their values, and the styling makes them easy to distinguish.</p></li>
+<li><p>Display: The plt.show() function renders the window showing the tree.</p></li>
+</ul>
+<p>The overall approach uses a mix of tree traversal to construct the graph structure and a recursive positioning algorithm to ensure that the visual representation respects the hierarchical nature of the binary tree. This method is particularly effective for educational purposes, as it clearly demonstrates the structure and relationships within the tree.</p>
+</section>
+</section>
+<section id="concept-2-graphs">
+<h2><strong>3. Concept 2: Graphs</strong><a class="headerlink" href="#concept-2-graphs" title="Link to this heading">#</a></h2>
+<p>Graphs are fundamental data structures in computer science, used extensively to model relationships and solve complex problems across various domains such as social networks, transportation, and internet infrastructure.</p>
+<p>Graph theory, a branch of mathematics, plays a fundamental role in network analysis by providing the foundation for various network analysis techniques (Kumar &amp; Yadav, 2016). The structure of graphs, consisting of vertices (nodes) and edges, is crucial in representing networks such as paths in maps or links in social networks (Liu &amp; Terzi, 2008). Graph theory is extensively used to model pairwise relations between objects, making it a valuable tool in various fields (Ghanbari &amp; Alikhani, 2023).</p>
+<p>Graph theory serves as a powerful tool in analyzing networks through the study of vertices, edges, and their relationships. The diverse range of graph types, operations, and labeling techniques studied in graph theory contributes to its significance in various mathematical and computational applications.</p>
+<p><img alt="DALL·E 2024-05-15 15.27.21 - A simple and clear illustration of basic graph theory, showing a basic graph with a few nodes and edges. The graph should include a few nodes labeled .webp" src="attachment:c268aa9a-f896-41e0-8816-d18bf3611672.webp" /></p>
+<p><strong>Vertices (Nodes):</strong></p>
+<ul class="simple">
+<li><p>The fundamental units represented as points in graph theory.</p></li>
+<li><p>Each vertex can represent entities such as cities in a transportation map or users in a social network.</p></li>
+</ul>
+<p><strong>Edges (Links):</strong></p>
+<ul class="simple">
+<li><p>Connections between vertices, represented as lines or arrows.</p></li>
+<li><p>Can be undirected (bidirectional) or directed (one-way), leading to the classifications of undirected and directed graphs, respectively.</p></li>
+<li><p>May be weighted to show a value such as distance, cost, or capacity.</p></li>
+</ul>
+<p><strong>Common Types of Graphs</strong></p>
+<ul class="simple">
+<li><p>Simple Graph: A graph with no loops (edges connected at both ends to the same vertex) and no more than one edge between any two vertices.</p></li>
+<li><p>Multigraph: Allows multiple edges between the same pair of vertices.</p></li>
+<li><p>Weighted Graph: Each edge carries a value known as weight, which could represent cost, length, or any quantifiable attribute.</p></li>
+<li><p>Directed Graph (Digraph): All edges are directed from one vertex to another.</p></li>
+<li><p>Tree: A special form of graph which is an acyclic connected graph.</p></li>
+</ul>
+<section id="id1">
+<h3><strong>3.2. Example</strong><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Imagine a small network of friends where connections represent friendships. This can be represented as a graph where each person is a node and each friendship is an edge.</p>
+</section>
+<section id="id2">
+<h3><strong>3.3. Code</strong><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Here’s how you could implement a simple graph in Python and perform a breadth-first search (BFS):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>
+
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">add_edge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">u</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">u</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Graph class: Represents a simple directed graph using an adjacency list.</p></li>
+<li><p><strong>init</strong> method: Initializes an empty dictionary graph to store graph vertices and edges.</p></li>
+<li><p>add_edge method: Adds a directed edge from vertex u to vertex v. If u is not already in graph, it initializes a new list.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bfs</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">queue</span> <span class="o">=</span> <span class="n">deque</span><span class="p">([</span><span class="n">start</span><span class="p">])</span>
+    <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+        <span class="n">vertex</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">popleft</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">vertex</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">vertex</span><span class="p">)</span>
+            <span class="n">queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vertex</span><span class="p">,</span> <span class="p">[]))</span> <span class="o">-</span> <span class="n">visited</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">visited</span><span class="p">)</span>
+
+<span class="c1"># Create graph</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Bob&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Cindy&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;Dan&#39;</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+
+<span class="c1"># Perform BFS</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BFS starting from Alice:&quot;</span><span class="p">,</span> <span class="n">bfs</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BFS starting from Alice: [&#39;Dan&#39;, &#39;Bob&#39;, &#39;Alice&#39;, &#39;Cindy&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Purpose: Performs a breadth-first search starting from the start vertex.</p></li>
+<li><p>deque for queuing: Ensures that vertices are visited in the order they are discovered.</p></li>
+<li><p>Handling visited nodes: Prevents revisiting nodes, crucial for avoiding infinite loops in cyclic graphs.</p></li>
+<li><p>Efficient lookup and extension: Uses sets to quickly check and add vertices that have not been visited yet.</p></li>
+</ul>
+<p><strong>Visualization</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="k">def</span> <span class="nf">draw_graph</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start_vertex</span><span class="p">,</span> <span class="n">bfs_order</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>  <span class="c1"># Create a directed graph</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>  <span class="c1"># Add edges to the graph</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Positions for all nodes</span>
+
+    <span class="c1"># Draw the network graph</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;#3b0a45&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-|&gt;&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Highlight the BFS traversal path</span>
+    <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bfs_order</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bfs_order</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Graph Visualization with BFS Traversal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># Assuming the rest of your code is already defined</span>
+<span class="n">bfs_result</span> <span class="o">=</span> <span class="n">bfs</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">)</span>
+<span class="n">draw_graph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="n">bfs_result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/9n/tmf7x35x5m125h7rk5qmzs6w0000gn/T/ipykernel_34870/1240579687.py:16: DeprecationWarning: `alltrue` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `all` instead.
+  nx.draw_networkx_edges(G, pos, edgelist=path_edges, edge_color=&#39;red&#39;, width=2, style=&#39;dashed&#39;)
+</pre></div>
+</div>
+<img alt="_images/0375e8192db8e0008f874c0d4c8201957f8138dd9fe4207065b54aea4fe1adfe.png" src="_images/0375e8192db8e0008f874c0d4c8201957f8138dd9fe4207065b54aea4fe1adfe.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Graph Creation: The function creates a DiGraph object from networkx to represent the directed nature of your graph.</p></li>
+<li><p>Adding Edges: Loops through your custom graph structure and adds all edges to the networkx graph.</p></li>
+<li><p>Positioning: Uses spring_layout for aesthetically pleasing automatic positioning of nodes.</p></li>
+<li><p>Drawing the Graph: Draws the graph with specific styling for nodes and edges.</p></li>
+<li><p>Highlighting BFS Path: Converts the BFS traversal order into a list of edges and redraws these edges with distinct styling (red and dashed) to emphasize the BFS path.</p></li>
+</ul>
+</section>
+</section>
+<section id="leetcode-problems">
+<h2><strong>4. LeetCode Problems</strong><a class="headerlink" href="#leetcode-problems" title="Link to this heading">#</a></h2>
+<section id="problem-1-maximum-depth-of-binary-tree">
+<h3><strong>Problem 1: Maximum Depth of Binary Tree</strong><a class="headerlink" href="#problem-1-maximum-depth-of-binary-tree" title="Link to this heading">#</a></h3>
+<p><strong>4.1.1. Problem Statement</strong></p>
+<p>Find the maximum depth of a binary tree.</p>
+<p><strong>4.1.2. Intuition</strong></p>
+<p>The depth of a binary tree is the longest path from the root node down to the farthest leaf node.</p>
+<p><strong>4.1.3. Code</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">root</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">left_height</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">left</span><span class="p">)</span>
+        <span class="n">right_height</span> <span class="o">=</span> <span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="o">.</span><span class="n">right</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">left_height</span><span class="p">,</span> <span class="n">right_height</span><span class="p">)</span>
+
+<span class="c1"># Example tree (constructed previously)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Maximum Depth:&quot;</span><span class="p">,</span> <span class="n">maxDepth</span><span class="p">(</span><span class="n">root</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Maximum Depth: 3
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Base Case: If the root is None (i.e., the tree is empty or it’s an empty leaf), return 0.</p></li>
+<li><p>Recursive Calls: Calculate the depth of the left subtree (left_height) and the right subtree (right_height) by recursively calling maxDepth.</p></li>
+<li><p>Compute Maximum Depth: Add 1 to the maximum of left_height and right_height. The addition of 1 represents the current node in the path length calculation.</p></li>
+</ul>
+<p>This function utilizes a depth-first search approach, specifically a post-order traversal, to reach the leaf nodes and then bubbles up the maximum depth values to the root.</p>
+</section>
+<section id="problem-2-find-if-path-exists-in-graph">
+<h3><strong>Problem 2: Find if Path Exists in Graph</strong><a class="headerlink" href="#problem-2-find-if-path-exists-in-graph" title="Link to this heading">#</a></h3>
+<p><strong>4.2.1. Problem Statement</strong></p>
+<p>Given a directed graph, determine if a path exists between two nodes.</p>
+<p><strong>4.2.2. Intuition</strong></p>
+<p>Use BFS or DFS to explore the graph from the starting node and check if the destination node can be reached.</p>
+<p><strong>4.2.3. Code</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hasPath</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">stack</span> <span class="o">=</span> <span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="n">stack</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Using previously created graph</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Path exists from Dan to Alice:&quot;</span><span class="p">,</span> <span class="n">hasPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Cindy&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Path exists from Dan to Alice: True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Stack Initialization: Start with a stack containing the start vertex.</p></li>
+<li><p>Loop Through Stack: Continue until the stack is empty, indicating all reachable nodes have been processed.</p></li>
+<li><p>Check End Condition: If the current node is the end vertex, return True indicating a path exists.</p></li>
+<li><p>Mark as Visited and Explore Further: If the node hasn’t been visited, mark it as visited and add its neighbors to the stack for further exploration.</p></li>
+</ul>
+<p>This code implements a depth-first search (DFS) to find a path in the graph. The use of a stack ensures nodes are explored in a LIFO (last-in-first-out) order.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_graph_with_path</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">path_exists</span><span class="p">):</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">neighbor</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">node</span><span class="p">]:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">neighbor</span><span class="p">)</span>
+
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">spring_layout</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>  <span class="c1"># Positions for all nodes using the spring layout</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">node_color</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">arrowstyle</span><span class="o">=</span><span class="s1">&#39;-|&gt;&#39;</span><span class="p">,</span> <span class="n">arrowsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">path_exists</span><span class="p">:</span>
+        <span class="c1"># To highlight the path, you need to extract the path from &#39;start&#39; to &#39;end&#39;</span>
+        <span class="c1"># This requires a modification to &#39;hasPath&#39; to store the path or using nx.shortest_path if path exists</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">shortest_path</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+            <span class="n">path_edges</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+            <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx_edges</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">edgelist</span><span class="o">=</span><span class="n">path_edges</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">nx</span><span class="o">.</span><span class="n">NetworkXNoPath</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No path exists.&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Graph Visualization with Path Highlight&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">path_exists</span> <span class="o">=</span> <span class="n">hasPath</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">)</span>
+<span class="n">draw_graph_with_path</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">,</span> <span class="n">path_exists</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1b53a5ed2466fa9113dd93f1584f385cf114d98478ee80344a2c5196fb544730.png" src="_images/1b53a5ed2466fa9113dd93f1584f385cf114d98478ee80344a2c5196fb544730.png" />
+</div>
+</div>
+</section>
+<section id="problem-3-cycle-detection-in-directed-graph">
+<h3><strong>Problem 3: Cycle Detection in Directed Graph</strong><a class="headerlink" href="#problem-3-cycle-detection-in-directed-graph" title="Link to this heading">#</a></h3>
+<p><strong>4.3.1. Problem Statement</strong></p>
+<p>Detect if a directed graph contains a cycle.</p>
+<p><strong>4.3.2. Intuition</strong></p>
+<p>A cycle in a graph means revisiting a node. Use DFS to track visited nodes and backtrack to identify cycles.</p>
+<p><strong>4.3.3. Code</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">detectCycle</span><span class="p">(</span><span class="n">graph</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">recStack</span><span class="p">):</span>
+        <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="n">recStack</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">if</span> <span class="n">neighbour</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dfs</span><span class="p">(</span><span class="n">neighbour</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">recStack</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">neighbour</span> <span class="ow">in</span> <span class="n">recStack</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">recStack</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">visited</span><span class="p">,</span> <span class="n">recStack</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(),</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">graph</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dfs</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">visited</span><span class="p">,</span> <span class="n">recStack</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Detect cycle in the graph</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cycle detected:&quot;</span><span class="p">,</span> <span class="n">detectCycle</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cycle detected: True
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Recursive DFS Function: dfs is defined to explore each node. It uses two sets, visited to track all visited nodes, and recStack to track nodes currently in the recursive call stack.</p></li>
+<li><p>Cycle Detection Logic:</p></li>
+<li><ul>
+<li><p>If a node in recStack is encountered again, it indicates a back edge, which is a cycle in a directed graph.</p></li>
+</ul>
+</li>
+<li><ul>
+<li><p>Nodes are added to recStack when they are visited and removed when the recursion for that node returns.</p></li>
+</ul>
+</li>
+<li><p>Global Loop: Iterates over each node to handle disconnected components and ensure all nodes are checked for cycles.
+The detection of cycles in this manner is crucial for understanding dependencies and prerequisites in systems like task scheduling, course planning, and more, where a cyclic dependency can lead to deadlocks or inconsistencies. This DFS-based approach efficiently identifies cycles by tracing the recursion path and checking for revisited nodes within the same traversal path.</p></li>
+</ul>
+</section>
+</section>
+<section id="conclusion">
+<h2><strong>5. Conclusion</strong><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Trees and graphs are indispensable data structures in computer science, pivotal for modeling relationships and data organization that mimic real-world scenarios. They are fundamental to numerous classic and contemporary algorithms that power systems and applications across diverse fields such as artificial intelligence, networking, and bioinformatics.</p>
+<p>Trees simplify data management and access, especially in hierarchical formats. They form the backbone of efficient algorithms for searching, sorting, and managing data, with variations like binary search trees, AVL trees, and segment trees catering to specific needs like balancing, range queries, and updates.</p>
+<p>Graphs extend the concept of trees to more complex relationships by including cycles and various connectivity options, allowing for the representation of networks. This capability makes graphs suitable for various applications, from social networks analysis to route planning and network topology.</p>
+<p>The study of trees and graphs also introduces several essential techniques and principles in computer science, including recursion, divide-and-conquer strategies, and the concept of graph traversal techniques such as depth-first and breadth-first search, which are foundational for more advanced algorithms like Dijkstra’s and Floyd-Warshall.</p>
+<p>Additionally, an understanding of these structures enhances problem-solving skills, particularly in tackling challenges posed in competitive programming and technical interviews where efficiency and optimization are paramount. The ability to visualize and manipulate data within these structures is a critical skill for any software developer.</p>
+<p>In practice, mastering trees and graphs allows developers to make informed choices about data structures based on the specific requirements and constraints of their applications, leading to more efficient, scalable, and maintainable code.</p>
+<p><strong>References:</strong></p>
+<p>Grossman, P. (2009). Introduction to algorithms., 1-14. <a class="reference external" href="https://doi.org/10.1007/978-0-230-37405-8_1">https://doi.org/10.1007/978-0-230-37405-8_1</a></p>
+<p>Wang, H., Wang, J., Wang, J., Zhao, M., Zhang, W., Zhang, F., … &amp; Guo, M. (2021). Learning graph representation with generative adversarial nets. Ieee Transactions on Knowledge and Data Engineering, 33(8), 3090-3103. <a class="reference external" href="https://doi.org/10.1109/tkde.2019.2961882">https://doi.org/10.1109/tkde.2019.2961882</a></p>
+<p>Chen, Y., Xia, Y., Yang, Y., &amp; Muntz, R. (2005). Mining closed and maximal frequent subtrees from databases of labeled rooted trees. Ieee Transactions on Knowledge and Data Engineering, 17(2), 190-202. <a class="reference external" href="https://doi.org/10.1109/tkde.2005.30">https://doi.org/10.1109/tkde.2005.30</a></p>
+<p>Durdymyradov, K. and Moshkov, M. (2023). Bounds on depth of decision trees derived from decision rule systems.. <a class="reference external" href="https://doi.org/10.48550/arxiv.2302.07063">https://doi.org/10.48550/arxiv.2302.07063</a></p>
+<p>Bordewich, M. and Semple, C. (2005). On the computational complexity of the rooted subtree prune and regraft distance. Annals of Combinatorics, 8(4), 409-423. <a class="reference external" href="https://doi.org/10.1007/s00026-004-0229-z">https://doi.org/10.1007/s00026-004-0229-z</a></p>
+<p>Adler, M. and Heeringa, B. (2011). Approximating optimal binary decision trees. Algorithmica, 62(3-4), 1112-1121. <a class="reference external" href="https://doi.org/10.1007/s00453-011-9510-9">https://doi.org/10.1007/s00453-011-9510-9</a></p>
+<p>Broutin, N. and Devroye, L. (2006). Large deviations for the weighted height of an extended class of trees. Algorithmica, 46(3-4), 271-297. <a class="reference external" href="https://doi.org/10.1007/s00453-006-0112-x">https://doi.org/10.1007/s00453-006-0112-x</a></p>
+<p>Chen, K., Durand, D., &amp; Farach-Colton, M. (2000). Notung: a program for dating gene duplications and optimizing gene family trees. Journal of Computational Biology, 7(3-4), 429-447. <a class="reference external" href="https://doi.org/10.1089/106652700750050871">https://doi.org/10.1089/106652700750050871</a></p>
+<p>Devroye, L. (1991). Limit laws for local counters in random binary search trees. Random Structures and Algorithms, 2(3), 303-315. <a class="reference external" href="https://doi.org/10.1002/rsa.3240020305">https://doi.org/10.1002/rsa.3240020305</a></p>
+<p>Devroye, L. (2002). Limit laws for sums of functions of subtrees of random binary search trees. Siam Journal on Computing, 32(1), 152-171. <a class="reference external" href="https://doi.org/10.1137/s0097539701383923">https://doi.org/10.1137/s0097539701383923</a></p>
+<p>Holmgren, C. and Janson, S. (2015). Limit laws for functions of fringe trees for binary search trees and random recursive trees. Electronic Journal of Probability, 20(none). <a class="reference external" href="https://doi.org/10.1214/ejp.v20-3627">https://doi.org/10.1214/ejp.v20-3627</a></p>
+<p>Jin, H. and Mo, Q. (2013). Hip fracture prediction from a new classification algorithm based on recursive partitioning methods. Journal of Applied Statistics, 40(6), 1246-1253. <a class="reference external" href="https://doi.org/10.1080/02664763.2013.785490">https://doi.org/10.1080/02664763.2013.785490</a></p>
+<p>Li, S., Wang, H., &amp; Wang, S. (2019). Some extremal ratios of the distance and subtree problems in binary trees. Applied Mathematics and Computation, 361, 232-245. <a class="reference external" href="https://doi.org/10.1016/j.amc.2019.05.023">https://doi.org/10.1016/j.amc.2019.05.023</a></p>
+<p>Magner, A., Turowski, K., &amp; Szpankowski, W. (2018). Lossless compression of binary trees with correlated vertex names. Ieee Transactions on Information Theory, 64(9), 6070-6080. <a class="reference external" href="https://doi.org/10.1109/tit.2018.2851224">https://doi.org/10.1109/tit.2018.2851224</a></p>
+<p>Radha, H., Vetterli, M., &amp; Leonardi, R. (1996). Image compression using binary space partitioning trees. Ieee Transactions on Image Processing, 5(12), 1610-1624. <a class="reference external" href="https://doi.org/10.1109/83.544569">https://doi.org/10.1109/83.544569</a></p>
+<p>Salembier, P. and Foucher, S. (2016). Optimum graph cuts for pruning binary partition trees of polarimetric sar images. Ieee Transactions on Geoscience and Remote Sensing, 54(9), 5493-5502. <a class="reference external" href="https://doi.org/10.1109/tgrs.2016.2566581">https://doi.org/10.1109/tgrs.2016.2566581</a></p>
+<p>Salembier, P. and Garrido, L. (2000). Binary partition tree as an efficient representation for image processing, segmentation, and information retrieval. Ieee Transactions on Image Processing, 9(4), 561-576. <a class="reference external" href="https://doi.org/10.1109/83.841934">https://doi.org/10.1109/83.841934</a></p>
+<p>Senhadji-Navarro, R. and Garcia-Vargas, I. (2018). High-performance architecture for binary-tree-based finite state machines. Ieee Transactions on Computer-Aided Design of Integrated Circuits and Systems, 37(4), 796-805. <a class="reference external" href="https://doi.org/10.1109/tcad.2017.2731678">https://doi.org/10.1109/tcad.2017.2731678</a></p>
+<p>Valero, S., Salembier, P., &amp; Chanussot, J. (2013). Hyperspectral image representation and processing with binary partition trees. Ieee Transactions on Image Processing, 22(4), 1430-1443. <a class="reference external" href="https://doi.org/10.1109/tip.2012.2231687">https://doi.org/10.1109/tip.2012.2231687</a></p>
+<p>Veganzones, M., Tochon, G., Mura, M., &amp; Chanussot, J. (2014). Hyperspectral image segmentation using a new spectral unmixing-based binary partition tree representation. Ieee Transactions on Image Processing, 23(8), 3574-3589. <a class="reference external" href="https://doi.org/10.1109/tip.2014.2329767">https://doi.org/10.1109/tip.2014.2329767</a></p>
+<p>Kumar, S. and Yadav, R. (2016). Application of graph theory in network analysis. International Journal of Mathematics Trends and Technology, 31(2), 44-45. <a class="reference external" href="https://doi.org/10.14445/22315373/ijmtt-v31p511">https://doi.org/10.14445/22315373/ijmtt-v31p511</a></p>
+<p>Liu, K. and Terzi, E. (2008). Towards identity anonymization on graphs.. <a class="reference external" href="https://doi.org/10.1145/1376616.1376629">https://doi.org/10.1145/1376616.1376629</a></p>
+<p>Ghanbari, N. and Alikhani, S. (2023). A graph related to the euler ø function. The Mathematical Gazette, 107(569), 263-272. <a class="reference external" href="https://doi.org/10.1017/mag.2023.57">https://doi.org/10.1017/mag.2023.57</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter: Arrays and Pointers</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter7.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Chapter: Graph Traversals</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-intuition"><strong>1. Motivation/Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-binary-trees"><strong>2. Concept 1: Binary Trees</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition"><strong>2.1. Intuition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example"><strong>2.2. Example</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code"><strong>2.3. Code</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-graphs"><strong>3. Concept 2: Graphs</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>3.2. Example</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2"><strong>3.3. Code</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems"><strong>4. LeetCode Problems</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-maximum-depth-of-binary-tree"><strong>Problem 1: Maximum Depth of Binary Tree</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-find-if-path-exists-in-graph"><strong>Problem 2: Find if Path Exists in Graph</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-cycle-detection-in-directed-graph"><strong>Problem 3: Cycle Detection in Directed Graph</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><strong>5. Conclusion</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

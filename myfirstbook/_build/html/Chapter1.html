@@ -1,0 +1,787 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Brief History of Python programming language. &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter1';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Report Final. Algorithms" href="Chapter2.html" />
+    <link rel="prev" title="Welcome to your Jupyter Book" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter1.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Brief History of Python programming language.</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brief History of Python programming language.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-key-features-of-python-programming-language">Main Key Features of Python programming language.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-jupyter-notebooks">Introduction to Jupyter Notebooks.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-types">Cell Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#style-your-text">Style Your Text.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#headers">Headers.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-lists">Creating lists.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="brief-history-of-python-programming-language">
+<h1>Brief History of Python programming language.<a class="headerlink" href="#brief-history-of-python-programming-language" title="Link to this heading">#</a></h1>
+<p>Python is a popular high-level, general-purpose programming language. In 1991, Guido van Rossum created the original concept, which the Python Software Foundation later improved. Programmers may express concepts in fewer lines of code thanks to its syntax, which was primarily built with code readability in mind.</p>
+<p>History was about to be written in the late 1980s. That was the beginning of the Python project. Not long afterward, in December 1989, Guido Van Rossum started working on application-based projects at Centrum Wiskunde &amp; Informatica (CWI), a Dutch organization. He began it as a hobby project since he was trying to find something engaging to do over Christmas.</p>
+<p>1991 saw the official release of the language. When compared to Java, C++, and C, it utilized a lot less code to describe the concepts at the time of release. Its design ethos was also excellent. Code readability and increased developer productivity are its primary goals. When it was first launched, it was more than capable of supporting various fundamental data types for exception handling, inheritance in classes, and other features.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="main-key-features-of-python-programming-language">
+<h1>Main Key Features of Python programming language.<a class="headerlink" href="#main-key-features-of-python-programming-language" title="Link to this heading">#</a></h1>
+<p><strong>Free and Open Source.</strong> Python language is freely available at the official website and you can download it from the given download link, click on the Download Python keyword Download Python. Since it’s open-source, the public can access the source code as well. Thus, you are able to download, use, and distribute it.</p>
+<p><strong>Simple to write code for.</strong> Compared to other programming languages like C, C#, Javascript, Java, etc., Python is a high-level language that is very simple to learn. Python is a fairly simple language to code with, and anyone can pick up the fundamentals in a matter of hours or days. Additionally, the language is developer-friendly.</p>
+<p><strong>Simple to understand.</strong> You will find that learning Python is quite simple. As was already mentioned, Python has a fairly simple syntax. The indentations define the code block instead of semicolons or brackets.</p>
+<p><strong>Language with an Object Focus.</strong> Object-oriented programming is one of Python’s primary characteristics. Python offers support for object-oriented languages, classes, object encapsulation, and other related ideas.</p>
+<p><strong>Support for GUI Programming.</strong> With Python, one may create graphical user interfaces by utilizing modules like PyQt5, PyQt4, wxPython, or Tk. The most widely used tool for Python programmers to create graphical applications is PyQt5.</p>
+<p><strong>High-level Language.</strong> Writing programs in Python eliminates the need to memorize memory management and system architecture.</p>
+<p><strong>Portable language.</strong> For instance, we don’t need to modify Python code written for Windows in order to run it on Linux, Unix, Mac, or any other platform.</p>
+<p><strong>Large Standard Library.</strong> Because of Python’s extensive standard library, which offers a wide range of modules and functions, you don’t need to develop your code for everything. Python comes with a lot of libraries, including ones for web browsers, regular expressions, and unit testing.</p>
+<p><strong>Language Typed Dynamically.</strong> Python is a language with dynamic typing. This means that we don’t need to define the type of variable because it is selected at run time rather than beforehand (for example, int, double, long, etc.).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-jupyter-notebooks">
+<h1>Introduction to Jupyter Notebooks.<a class="headerlink" href="#introduction-to-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<p>Using the Jupyter Notebook, an open-source web tool, you can create and distribute documents with text, equations, live code, and visualizations. The Jupyter Notebook team is in charge of maintaining the Jupyter Notebook.</p>
+<p>Installing a Jupyter Notebook is required if you wish to experiment with Python because it is not included with Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+    <span class="err">$</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: invalid syntax
+</pre></div>
+</div>
+</div>
+</div>
+<p>To start working with Jupyter Notebook, you need to type the following command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> <span class="n">jupyter</span> <span class="n">notebook</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Your browser should now look like this.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.21.41.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/93419d92e17162200fbf88c23dda1bc1a9ad10e1199c6e6eaf90e95d74d933e0.png"><img alt="_images/93419d92e17162200fbf88c23dda1bc1a9ad10e1199c6e6eaf90e95d74d933e0.png" src="_images/93419d92e17162200fbf88c23dda1bc1a9ad10e1199c6e6eaf90e95d74d933e0.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>So you know how to open a Jupyter Notebook, next, you need to create an empty notebook.</p>
+<p>All you need to do is click on the <strong>New</strong> button (upper right), and it will open up a list of choices. Choose Python 3.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.37.27.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/0c453af3ce4d8473c4330e58cf54f3b8cdfe0480d2b48949ddba201c79fe5d15.png"><img alt="_images/0c453af3ce4d8473c4330e58cf54f3b8cdfe0480d2b48949ddba201c79fe5d15.png" src="_images/0c453af3ce4d8473c4330e58cf54f3b8cdfe0480d2b48949ddba201c79fe5d15.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>To rename the file simply drag the mouse pointer over the term <strong>Untitled</strong> and select the text. The Rename Notebook in-browser dialogue should now appear. Let’s call it <strong>Test</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.41.59.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/341f2155d964920e2ea1076b852b8ee5f28f8a72d27772bd490f5ca0ec932b72.png"><img alt="_images/341f2155d964920e2ea1076b852b8ee5f28f8a72d27772bd490f5ca0ec932b72.png" src="_images/341f2155d964920e2ea1076b852b8ee5f28f8a72d27772bd490f5ca0ec932b72.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>In empty cells, you can write the code and execute it by clicking the <strong>Run</strong> button.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.43.41.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/653226fb9bbe95466c9afdcf15974bfccc82da84f43f6057d7ad256157c2e6e0.png"><img alt="_images/653226fb9bbe95466c9afdcf15974bfccc82da84f43f6057d7ad256157c2e6e0.png" src="_images/653226fb9bbe95466c9afdcf15974bfccc82da84f43f6057d7ad256157c2e6e0.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>You can interact with your notebook using a number of choices available in the Jupyter Notebook. Similar to menus in other programs, the notebook’s menu runs down the top.</p>
+<ul class="simple">
+<li><p>File</p></li>
+<li><p>Edit</p></li>
+<li><p>View</p></li>
+<li><p>Insert</p></li>
+<li><p>Cell</p></li>
+<li><p>Kernel</p></li>
+<li><p>Widgets</p></li>
+<li><p>Help</p></li>
+</ul>
+<p>The <strong>File</strong> menu appears first. You can open an existing Notebook or create a new one within it. You can also go here to rename a notebook. The Save and Checkpoint option is the most intriguing menu item. This enables you to set up checkpoints that you may return to in case something goes wrong.</p>
+<p>The <strong>Edit</strong> menu comes next. Cells can be copied, cut, and pasted here. In order to remove, divide, or combine a cell, you would also go here. Cells can also be rearranged here.</p>
+<p>You can toggle the header and toolbar visibility using the <strong>View</strong> menu. Additionally, you can turn on or off Line Numbers within cells. If you want to fiddle with the toolbar on the cell, this is the place to go.</p>
+<p>The <strong>Insert</strong> menu is just for inserting cells above or below the currently selected cell.</p>
+<p>You can execute a single cell, a collection of cells, or every cell using the <strong>Cell</strong> menu. To alter a cell’s type, you may also go here, however I think the toolbar is more user-friendly for that. The option to clear a cell’s output is another useful feature in this menu. You should clear the output first if you intend to share your Notebook with others so that they can run the cells on their own.</p>
+<p>Working with the background-executing kernel is the responsibility of the <strong>Kernel</strong> cell. This is where you can change the kernel that your notebook is running, restart it, reconnect to it, and shut it off. Although it is unlikely that you would work with the kernel frequently, there are occasions when diagnosing a notebook may need restarting the kernel. You would go here if it were to occur.</p>
+<p>The widget state can be cleared and saved using the <strong>Widgets</strong> menu. In essence, widgets are JavaScript elements that you can incorporate into your cells to create dynamic content with Python (or an alternative Kernel).</p>
+<p>Lastly, there is the <strong>Help</strong> menu, which provides a tour of the Notebook’s user interface, a list of keyboard shortcuts, and a wealth of reference information.</p>
+<section id="cell-types">
+<h2>Cell Types<a class="headerlink" href="#cell-types" title="Link to this heading">#</a></h2>
+<p>Technically, there are four different kinds of cells: <strong>Heading, Markdown, Code,</strong> and <strong>Raw NBConvert</strong>.</p>
+<p>There is no longer support for the Heading cell type; a dialogue box indicating this will appear. Markdown is what you should be using instead for your headings.</p>
+<p>With the nbconvert command line program, the Raw NBConvert cell type is solely meant for specific use scenarios. In essence, it gives you precise control over formatting when converting from one Notebook format to another.</p>
+<p>The Code and Markdown cell types are the main cell types that you will employ. Since you already know how code cells operate, let’s move on to using Markdown to style your writing.</p>
+</section>
+<section id="style-your-text">
+<h2>Style Your Text.<a class="headerlink" href="#style-your-text" title="Link to this heading">#</a></h2>
+<p>Markdown is a markup language that is a superset of HTML and is supported by Jupyter Notebook. After converting a new cell to Markdown, enter the following text in it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.54.34.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/920b8ee2a316040862e478b9cd128d29743c0922f7c1fca19a357eb6efe88417.png"><img alt="_images/920b8ee2a316040862e478b9cd128d29743c0922f7c1fca19a357eb6efe88417.png" src="_images/920b8ee2a316040862e478b9cd128d29743c0922f7c1fca19a357eb6efe88417.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>When you run the cell, the output should look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.56.00.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e15533008114140865bb4bba4e3f8874d002d86350848e4f9f3232e15bdfff0a.png"><img alt="_images/e15533008114140865bb4bba4e3f8874d002d86350848e4f9f3232e15bdfff0a.png" src="_images/e15533008114140865bb4bba4e3f8874d002d86350848e4f9f3232e15bdfff0a.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+</section>
+<section id="headers">
+<h2>Headers.<a class="headerlink" href="#headers" title="Link to this heading">#</a></h2>
+<p>In Markdown, creating headers is also quite easy. All you need to do is utilize the humble pound sign. The heading gets smaller if you add more pound signs. You can even kind of preview it with Jupyter Notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 20.58.21.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/e458638c1190c9dc2b722fdaf17b9e474d4fe3ab24c8b69e0113f3a9364fa0e8.png"><img alt="_images/e458638c1190c9dc2b722fdaf17b9e474d4fe3ab24c8b69e0113f3a9364fa0e8.png" src="_images/e458638c1190c9dc2b722fdaf17b9e474d4fe3ab24c8b69e0113f3a9364fa0e8.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>When you run the cell, the output should look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 21.03.51.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/43b2ec1b318dae5dea578c8160ec3ec6f35f311b90d6f1d7fb989b889c5baf20.png"><img alt="_images/43b2ec1b318dae5dea578c8160ec3ec6f35f311b90d6f1d7fb989b889c5baf20.png" src="_images/43b2ec1b318dae5dea578c8160ec3ec6f35f311b90d6f1d7fb989b889c5baf20.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+</section>
+<section id="creating-lists">
+<h2>Creating lists.<a class="headerlink" href="#creating-lists" title="Link to this heading">#</a></h2>
+<p>You can create a list (bullet points) by using dashes, plus signs, or asterisks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 21.06.02.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/b65f65fd5e7ef6ff28e1e0a6b3a8b1ec15c6f1f91c37bd7847835b2e0d02eb0b.png"><img alt="_images/b65f65fd5e7ef6ff28e1e0a6b3a8b1ec15c6f1f91c37bd7847835b2e0d02eb0b.png" src="_images/b65f65fd5e7ef6ff28e1e0a6b3a8b1ec15c6f1f91c37bd7847835b2e0d02eb0b.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>You can use Markdown to insert code examples that you would like not to have your end user execute. To highlight code inline, simply encircle the code with backticks. You can specify the programming language and use triple backticks to insert a block of code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 21.07.43.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/9df493795455b2a9977630586e40f0f279dbe2e666df3125ed6927f939c79c8d.png"><img alt="_images/9df493795455b2a9977630586e40f0f279dbe2e666df3125ed6927f939c79c8d.png" src="_images/9df493795455b2a9977630586e40f0f279dbe2e666df3125ed6927f939c79c8d.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+<p>When you run the cell, the output should look like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;/Users/asselyembergenova/Desktop/Screenshot 2024-05-08 at 21.09.32.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">870</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<a class="reference internal image-reference" href="_images/171beb636cafb523dd6fa8eb9e202c284cca36ed700cd8b01bee33fd98cf068d.png"><img alt="_images/171beb636cafb523dd6fa8eb9e202c284cca36ed700cd8b01bee33fd98cf068d.png" src="_images/171beb636cafb523dd6fa8eb9e202c284cca36ed700cd8b01bee33fd98cf068d.png" style="width: 870px; height: 500px;" /></a>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>GeeksforGeeks. (2023, December 26). History of Python. GeeksforGeeks. <a class="reference external" href="https://www.geeksforgeeks.org/history-of-python/">https://www.geeksforgeeks.org/history-of-python/</a></p></li>
+<li><p>GeeksforGeeks. (2023a, November 1). Python features. GeeksforGeeks. <a class="reference external" href="https://www.geeksforgeeks.org/python-features/">https://www.geeksforgeeks.org/python-features/</a></p></li>
+<li><p>Python, R. (2023, November 20). Jupyter Notebook: An Introduction. <a class="reference external" href="https://realpython.com/jupyter-notebook-introduction/">https://realpython.com/jupyter-notebook-introduction/</a></p></li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to your Jupyter Book</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Report Final. Algorithms</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Brief History of Python programming language.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#main-key-features-of-python-programming-language">Main Key Features of Python programming language.</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-jupyter-notebooks">Introduction to Jupyter Notebooks.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-types">Cell Types</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#style-your-text">Style Your Text.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#headers">Headers.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-lists">Creating lists.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

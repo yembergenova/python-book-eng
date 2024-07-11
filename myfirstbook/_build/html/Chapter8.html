@@ -1,0 +1,1056 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Graph Shortest Paths &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter8';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Recursion, Backtracking, Recurrence Relations" href="Chapter9.html" />
+    <link rel="prev" title="Chapter: Graph Traversals" href="Chapter7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter8.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter8.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Graph Shortest Paths</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="graph-shortest-paths">
+<h1>Graph Shortest Paths<a class="headerlink" href="#graph-shortest-paths" title="Link to this heading">#</a></h1>
+<h2> 1. Motivation/Intuition</h2><p>With many practical uses, determining the shortest path within a graph is a basic computer science problem. Shortest path algorithms are essential to many tasks, such as using a GPS to navigate through a city, optimizing routes in a logistics network, and figuring out the quickest method to deliver data over the internet.</p>
+<h3><font color='black'>Real world examples:</font></h3>
+<p><b> GPS Navigation: </b> When you use a GPS device to find the quickest route to your destination, it relies on shortest path algorithms to compute the best path through the road network.</p>
+<p><b> Network Routing: </b> The internet uses shortest path algorithms to direct data packets efficiently from source to destination, ensuring quick and reliable communication.</p>
+<p><b> Logistics and Supply Chain Management: </b> Companies like Amazon and FedEx use these algorithms to optimize delivery routes, minimizing costs and delivery times</p>
+<h2> 2. Concept 1: Dijkstra's Algorithm </h2><h3> 2.1. Intuition </h3>
+<p>Dijkstra’s algorithm is a greedy algorithm designed to find the shortest path from a single source node to all other nodes in a weighted graph with non-negative weights.The goal is to examine paths according to their distance from the source, making sure that the shortest path for a node remains constant after it has been identified.</p>
+<p>Imagine it as navigating a map with each city as a node and the highways connecting them as edges with weights representing the distances between them. You always opt to travel to the closest city you haven’t yet visited, starting from your current location and updating your shortest known paths along the way.</p>
+<p>The idea is to generate a SPT (shortest path tree) with a given source as a root. Maintain an Adjacency Matrix with two sets,</p>
+<ul class="simple">
+<li><p>one set contains vertices included in the shortest-path tree</p></li>
+<li><p>other set includes vertices not yet included in the shortest-path tree.</p></li>
+</ul>
+<h3> 2.2. Example </h3><p>Consider below graph and <i> src = 0 </i></p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20240111182238/Working-of-Dijkstras-Algorithm-768.jpg" width=750>
+</center><p><b> Step 1: </b></p>
+<ul class="simple">
+<li><p>The set sptSet is initially empty and distances assigned to vertices are {0, INF, INF, INF, INF, INF, INF, INF} where INF indicates infinite.</p></li>
+<li><p>Now pick the vertex with a minimum distance value. The vertex 0 is picked, include it in sptSet. So sptSet becomes {0}. After including 0 to sptSet, update distance values of its adjacent vertices.</p></li>
+<li><p>Adjacent vertices of 0 are 1 and 7. The distance values of 1 and 7 are updated as 4 and 8.</p></li>
+</ul>
+<p>The following subgraph shows vertices and their distance values, only the vertices with finite distance values are shown. The vertices included in SPT are shown in green colour.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20231121131452/6.jpg" width=750>
+</center><p><b> Step 2: </b></p>
+<p>-Pick the vertex with minimum distance value and not already included in SPT (not in sptSET). The vertex 1 is picked and added to sptSet.</p>
+<p>-So sptSet now becomes {0, 1}. Update the distance values of adjacent vertices of 1.</p>
+<p>-The distance value of vertex 2 becomes 12.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20231121131946/4.jpg" width=750>
+</center><p><b> Step 3: </b></p>
+<p>-Pick the vertex with minimum distance value and not already included in SPT (not in sptSET). Vertex 7 is picked. So sptSet now becomes {0, 1, 7}.</p>
+<p>-Update the distance values of adjacent vertices of 7. The distance value of vertex 6 and 8 becomes finite (15 and 9 respectively).</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20231121132026/5.jpg" width=750>
+</center><p><b> Step 4: </b></p>
+<p>-Pick the vertex with minimum distance value and not already included in SPT (not in sptSET). Vertex 6 is picked. So sptSet now becomes {0, 1, 7, 6}.</p>
+<p>-Update the distance values of adjacent vertices of 6. The distance value of vertex 5 and 8 are updated.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20231121132105/3-(1).jpg" width=750>
+</center><p>We repeat the above steps until sptSet includes all vertices of the given graph. Finally, we get the following Shortest Path Tree (SPT).</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20231121132145/2-(2).jpg" width=750>
+</center><h3> 2.3 Code </h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python program for Dijkstra&#39;s single</span>
+<span class="c1"># source shortest path algorithm. The program is</span>
+<span class="c1"># for adjacency matrix representation of the graph</span>
+
+<span class="c1"># Library for INT_MAX</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">():</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">vertices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
+                      <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">vertices</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">printSolution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vertex </span><span class="se">\t</span><span class="s2">Distance from Source&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">dist</span><span class="p">[</span><span class="n">node</span><span class="p">])</span>
+
+    <span class="c1"># A utility function to find the vertex with</span>
+    <span class="c1"># minimum distance value, from the set of vertices</span>
+    <span class="c1"># not yet included in shortest path tree</span>
+    <span class="k">def</span> <span class="nf">minDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">sptSet</span><span class="p">):</span>
+
+        <span class="c1"># Initialize minimum distance for next node</span>
+        <span class="nb">min</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+
+        <span class="c1"># Search not nearest vertex not in the</span>
+        <span class="c1"># shortest path tree</span>
+        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">&lt;</span> <span class="nb">min</span> <span class="ow">and</span> <span class="n">sptSet</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+                <span class="nb">min</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+                <span class="n">min_index</span> <span class="o">=</span> <span class="n">u</span>
+
+        <span class="k">return</span> <span class="n">min_index</span>
+
+    <span class="c1"># Function that implements Dijkstra&#39;s single source</span>
+    <span class="c1"># shortest path algorithm for a graph represented</span>
+    <span class="c1"># using adjacency matrix representation</span>
+    <span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">sptSet</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span>
+
+        <span class="k">for</span> <span class="n">cout</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">):</span>
+
+            <span class="c1"># Pick the minimum distance vertex from</span>
+            <span class="c1"># the set of vertices not yet processed.</span>
+            <span class="c1"># x is always equal to src in first iteration</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minDistance</span><span class="p">(</span><span class="n">dist</span><span class="p">,</span> <span class="n">sptSet</span><span class="p">)</span>
+
+            <span class="c1"># Put the minimum distance vertex in the</span>
+            <span class="c1"># shortest path tree</span>
+            <span class="n">sptSet</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="c1"># Update dist value of the adjacent vertices</span>
+            <span class="c1"># of the picked vertex only if the current</span>
+            <span class="c1"># distance is greater than new distance and</span>
+            <span class="c1"># the vertex in not in the shortest path tree</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">sptSet</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> \
+                        <span class="n">dist</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">printSolution</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+
+
+<span class="c1"># Driver&#39;s code</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+               <span class="p">]</span>
+
+    <span class="n">g</span><span class="o">.</span><span class="n">dijkstra</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vertex 	Distance from Source
+0 	 0
+1 	 4
+2 	 12
+3 	 19
+4 	 21
+5 	 11
+6 	 9
+7 	 8
+8 	 14
+</pre></div>
+</div>
+</div>
+</div>
+<h2> 3. Concept 2: Bellman-Ford Algorithm </h2><h3> 3.1 Intuition </h1><p>Bellman-Ford is another algorithm for finding the shortest paths from a single source to all other nodes in a graph. It can handle graphs with negative weights, unlike Dijkstra’s. In order to update the shortest path estimates, iteratively relaxing each edge in the graph is how it operates.</p>
+<p>Bellman-Ford is very helpful in identifying negative weight cycles, which are cycles in which the overall weight is negative. The technique can detect the existence of such cycles, which is important for applications such as financial modeling and certain optimization issues.</p>
+<h3> 3.2 Example </h3> <p>Let’s suppose we have a graph which is given below and we want to find whether there exists a negative cycle or not using Bellman-Ford.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816131246/Bellman-Ford-To-Detect-A-Negative-Cycle-In-A-Graph.png" width=750>
+</center><p><b> Step 1: </b> Initialize a distance array Dist[] to store the shortest distance for each vertex from the source vertex. Initially distance of source will be 0 and Distance of other vertices will be INFINITY.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816131322/file.png" width=750>
+</center><p><b> Step 2: </b> Start relaxing the edges, during 1st Relaxation:</p>
+<p>Current Distance of B &gt; (Distance of A) + (Weight of A to B) i.e. Infinity &gt; 0 + 5</p>
+<ul class="simple">
+<li><p>Therefore, Dist[B] = 5</p></li>
+</ul>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816153449/file.png" width=750>
+</center><p><b> Step 3: </b>
+During 2nd Relaxation:</p>
+<p>Current Distance of D &gt; (Distance of B) + (Weight of B to D) i.e. Infinity &gt; 5 + 2</p>
+<ul class="simple">
+<li><p>Dist[D] = 7</p></li>
+</ul>
+<p>Current Distance of C &gt; (Distance of B) + (Weight of B to C) i.e. Infinity &gt; 5 + 1</p>
+<ul class="simple">
+<li><p>Dist[C] = 6</p></li>
+</ul>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816131450/file.png" width=750>
+</center><p><b> Step 4: </b>  During 3rd Relaxation:</p>
+<p>Current Distance of F &gt; (Distance of D ) + (Weight of D to F) i.e. Infinity &gt; 7 + 2</p>
+<ul class="simple">
+<li><p>Dist[F] = 9</p></li>
+</ul>
+<p>Current Distance of E &gt; (Distance of C ) + (Weight of C to E) i.e. Infinity &gt; 6 + 1</p>
+<ul class="simple">
+<li><p>Dist[E] = 7</p></li>
+</ul>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816132008/file.png" width=750>
+</center><p><b> Step 5: </b> During 4th Relaxation:</p>
+<p>Current Distance of D &gt; (Distance of E) + (Weight of E to D) i.e. 7 &gt; 7 + (-1)</p>
+<ul class="simple">
+<li><p>Dist[D] = 6</p></li>
+</ul>
+<p>Current Distance of E &gt; (Distance of F ) + (Weight of F to E) i.e. 7 &gt; 9 + (-3)</p>
+<ul class="simple">
+<li><p>Dist[E] = 6</p></li>
+</ul>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816132039/file.png" width=750>
+</center><p><b> Step 6: </b> During 5th Relaxation:</p>
+<p>Current Distance of F &gt; (Distance of D) + (Weight of D to F) i.e. 9 &gt; 6 + 2</p>
+<ul class="simple">
+<li><p>Dist[F] = 8</p></li>
+</ul>
+<p>Current Distance of D &gt; (Distance of E ) + (Weight of E to D) i.e. 6 &gt; 6 + (-1)</p>
+<ul class="simple">
+<li><p>Dist[D] = 5</p></li>
+</ul>
+<p>Since the graph h 6 vertices, So during the 5th relaxation the shortest distance for all the vertices should have been calculated.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816132100/file.png" width=750>
+</center><p><b> Step 7: </b> Now the final relaxation i.e. the 6th relaxation should indicate the presence of negative cycle if there is any changes in the distance array of 5th relaxation.</p>
+<p>During the 6th relaxation, following changes can be seen:</p>
+<p>Current Distance of E &gt; (Distance of F) + (Weight of F to E) i.e. 6 &gt; 8 + (-3)</p>
+<ul class="simple">
+<li><p>Dist[E]=5</p></li>
+</ul>
+<p>Current Distance of F &gt; (Distance of D ) + (Weight of D to F) i.e. 8 &gt; 5 + 2</p>
+<ul class="simple">
+<li><p>Dist[F]=7</p></li>
+</ul>
+<p>Since, we observer changes in the Distance array Hence ,we can conclude the presence of a negative cycle in the graph.</p>
+<center>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20230816132118/file.png" width=750>
+</center><p><b> Result:</b> A negative cycle (D-&gt;F-&gt;E) exists in the graph.</p>
+<h3> 3.3 Code </h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python3 program for Bellman-Ford&#39;s single source</span>
+<span class="c1"># shortest path algorithm.</span>
+
+<span class="c1"># Class to represent a graph</span>
+
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">=</span> <span class="n">vertices</span>  <span class="c1"># No. of vertices</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># function to add an edge to graph</span>
+    <span class="k">def</span> <span class="nf">addEdge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">])</span>
+
+    <span class="c1"># utility function used to print the solution</span>
+    <span class="k">def</span> <span class="nf">printArr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vertex Distance from Source&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="se">\t\t</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">dist</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+    <span class="c1"># The main function that finds shortest distances from src to</span>
+    <span class="c1"># all other vertices using Bellman-Ford algorithm. The function</span>
+    <span class="c1"># also detects negative weight cycle</span>
+    <span class="k">def</span> <span class="nf">BellmanFord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">):</span>
+
+        <span class="c1"># Step 1: Initialize distances from src to all other vertices</span>
+        <span class="c1"># as INFINITE</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">)]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">V</span>
+        <span class="n">dist</span><span class="p">[</span><span class="n">src</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># Step 2: Relax all edges |V| - 1 times. A simple shortest</span>
+        <span class="c1"># path from src to any other vertex can have at-most |V| - 1</span>
+        <span class="c1"># edges</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">V</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># Update dist value and parent index of the adjacent vertices of</span>
+            <span class="c1"># the picked vertex. Consider only those vertices which are still in</span>
+            <span class="c1"># queue</span>
+            <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                    <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span>
+
+        <span class="c1"># Step 3: check for negative-weight cycles. The above step</span>
+        <span class="c1"># guarantees shortest distances if graph doesn&#39;t contain</span>
+        <span class="c1"># negative weight cycle. If we get a shorter path, then there</span>
+        <span class="c1"># is a cycle.</span>
+
+        <span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph contains negative weight cycle&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+        <span class="c1"># print all distance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printArr</span><span class="p">(</span><span class="n">dist</span><span class="p">)</span>
+
+
+<span class="c1"># Driver&#39;s code</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">addEdge</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="c1"># function call</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">BellmanFord</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Initially, Contributed by Neelam Yadav</span>
+<span class="c1"># Later On, Edited by Himanshu Garg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vertex Distance from Source
+0		0
+1		-1
+2		2
+3		-2
+4		1
+</pre></div>
+</div>
+</div>
+</div>
+<h2> 4. Leetcode Problems related to this topic: </h2>
+<h3> 4.1 Problem 1: Evaluate Division </h3><h3> 4.1.1 Problem Statement </h3><p>You are given an array of variable pairs <i> equations </i> and an array of real numbers <i> values, </i> where <i>equations[i] = [Ai, Bi]</i> and <i>values[i] </i>represent the equation  <i> Ai / Bi = values[i]. </i> Each <i> Ai or Bi </i> is a string that represents a single variable.</p>
+<p>You are also given some <i> queries </i>, where <i>queries[j] = [Cj, Dj] </i>represents the jth query where you must find the answer for <i>Cj / Dj = ?</i>.</p>
+<p>Return the answers to all <i>queries</i>. If a single answer cannot be determined, return <b>-1.0. </b></p>
+<p><b>Note:</b> The input is always valid. You may assume that evaluating the queries will not result in division by zero and that there is no contradiction.</p>
+<p><b>Note: </b>The variables that do not occur in the list of equations are undefined, so the answer cannot be determined for them.</p>
+<h3> 4.1.2 Intuition </h3><p>The problem can be viewed as finding a path in a graph from the dividend node to the divisor node while keeping track of the product of the edge values. Each node represents a variable, and the edge values represent the division results between variables. By performing a BFS, we can explore all possible paths and find the division result if it exists.</p>
+<p>By building the graph and using BFS, we can efficiently evaluate the division queries by traversing the graph and multiplying the edge values encountered along the way. If the query variables are not present in the graph or if the destination variable is not reachable from the source variable, we return -1 to indicate that the division result is not possible.</p>
+<p><b>For example: </b></p>
+<p>Input: equations = [[“a”,”b”],[“b”,”c”]], values = [2.0,3.0], queries = [[“a”,”c”],[“b”,”a”],[“a”,”e”],[“a”,”a”],[“x”,”x”]]</p>
+<p>Output: [6.00000,0.50000,-1.00000,1.00000,-1.00000]</p>
+<p>Explanation:</p>
+<p>Given: a / b = 2.0, b / c = 3.0</p>
+<p>queries are:</p>
+<p>\begin{align}
+\frac{a}{c} = \frac{a}{b} * \frac{b}{c} = 6; &amp;&amp; \frac{b}{a} = \frac{1}{2}; &amp;&amp; \frac{a}{e} = -1; &amp;&amp; \frac{a}{a} = 1; &amp;&amp; \frac{x}{x}  = -1
+\end{align}</p>
+<p><i> x is not present, therefore it is -1</i></p>
+<p>return: [6.0, 0.5, -1.0, 1.0, -1.0 ]
+note: x is undefined =&gt; -1.0</p>
+<p><b>Building the Graph:</b></p>
+<ul class="simple">
+<li><p>We first construct the graph from the given equations and values using an adjacency list representation.</p></li>
+</ul>
+<p><b>DFS Implementation:</b></p>
+<ul class="simple">
+<li><p>The dfs method performs the depth-first search, accumulating the product of weights along the path and updating the answer when the destination node is reached.</p></li>
+</ul>
+<p><b>Handling Queries:</b></p>
+<ul class="simple">
+<li><p>For each query, we initiate a DFS from the dividend node to the divisor node, if they exist in the graph. We use a set to keep track of visited nodes to avoid cycles.</p></li>
+</ul>
+<h3> 4.1.3 Code <h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gr</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">vis</span><span class="p">:</span> <span class="nb">set</span><span class="p">,</span> <span class="n">ans</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">temp</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">vis</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">vis</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="o">==</span> <span class="n">dest</span><span class="p">:</span>
+            <span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">ne</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">gr</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">ne</span><span class="p">,</span> <span class="n">dest</span><span class="p">,</span> <span class="n">gr</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">temp</span> <span class="o">*</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">buildGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">equations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">gr</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">equations</span><span class="p">)):</span>
+            <span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span> <span class="o">=</span> <span class="n">equations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">dividend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gr</span><span class="p">:</span>
+                <span class="n">gr</span><span class="p">[</span><span class="n">dividend</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">divisor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gr</span><span class="p">:</span>
+                <span class="n">gr</span><span class="p">[</span><span class="n">divisor</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="n">gr</span><span class="p">[</span><span class="n">dividend</span><span class="p">][</span><span class="n">divisor</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="n">gr</span><span class="p">[</span><span class="n">divisor</span><span class="p">][</span><span class="n">dividend</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">gr</span>
+
+    <span class="k">def</span> <span class="nf">calcEquation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">equations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">queries</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="n">gr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">buildGraph</span><span class="p">(</span><span class="n">equations</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
+        <span class="n">finalAns</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">queries</span><span class="p">:</span>
+            <span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span> <span class="o">=</span> <span class="n">query</span>
+
+            <span class="k">if</span> <span class="n">dividend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gr</span> <span class="ow">or</span> <span class="n">divisor</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gr</span><span class="p">:</span>
+                <span class="n">finalAns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vis</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                <span class="n">ans</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">]</span>
+                <span class="n">temp</span> <span class="o">=</span> <span class="mf">1.0</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span><span class="p">(</span><span class="n">dividend</span><span class="p">,</span> <span class="n">divisor</span><span class="p">,</span> <span class="n">gr</span><span class="p">,</span> <span class="n">vis</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+                <span class="n">finalAns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">finalAns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h3> 4.2 Problem 2: Cheapest Flights Within K Stops </h3><h3> 4.2.1 Problem Statement </h3><p>There are <i>n</i> cities connected by some number of flights. You are given an array “flights” where <i>flights[i] = [fromi, toi, pricei]</i> indicates that there is a flight from city <i>fromi</i> to city <i>toi</i> with cost <i>pricei</i>.</p>
+<p>You are also given three integers <i>src, dst, and k,</i> return the cheapest price from <i>src to dst</i> with at most <i>k </i>stops. If there is no such route, return <b>-1</b>.</p>
+<p><b> Example: </b></p>
+<img src="https://assets.leetcode.com/uploads/2022/03/18/cheapest-flights-within-k-stops-3drawio.png" width=300>
+<p><b>Input:</b> n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]], src = 0, dst = 3, k = 1</p>
+<p><b>Output:</b> 700</p>
+<p><b>Explanation:</b></p>
+<p>The graph is shown above.
+The optimal path with at most 1 stop from city 0 to 3 is marked in red and has cost 100 + 600 = 700.
+Note that the path through cities [0,1,2,3] is cheaper but is invalid because it uses 2 stops.</p>
+<h3> 4.2.2 Intuition </h3><p><b>Graph Representation:</b></p>
+<ul class="simple">
+<li><p>We represent the flight routes as a graph where cities are nodes, and direct flights between them are directed edges with weights (prices).</p></li>
+<li><p>The flights input is converted into a dictionary (frs) where each key is a source city, and its value is a list of tuples representing the destination city and the flight price. A set (tos) is also used to keep track of all possible destination cities.</p></li>
+</ul>
+<p><b>Early Exit:</b></p>
+<ul class="simple">
+<li><p>Before proceeding with the algorithm, we check if the source city (src) has any outgoing flights and if the destination city (dst) is reachable by any incoming flight. If either condition is not met, we can return -1 early, indicating that no valid route exists.</p></li>
+</ul>
+<p><b>Initialization:</b></p>
+<ul class="simple">
+<li><p>We initialize the cheapest variable to keep track of the minimum cost found. Initially, it is set to infinity (float(‘inf’)) because we haven’t found any route yet.</p></li>
+<li><p>We start our search from the source city (src) and initialize a list (l) with all direct flights from the source. Each entry in l is a list containing the destination city, the current price to get there, and the number of stops made.</p></li>
+</ul>
+<p><b>Depth-First Search (DFS) with Pruning:</b></p>
+<ul class="simple">
+<li><p>We use a while loop to explore the possible routes in a depth-first manner.</p></li>
+<li><p>In each iteration, we pop a route from the list l. This gives us the current city (to), the total price to reach there (price), and the number of stops made (stop).</p></li>
+<li><p>If the current price exceeds the cheapest price found so far, we skip this route as it cannot provide a cheaper solution.</p></li>
+<li><p>If we reach the destination city (dst), we update the cheapest price if the current route’s price is lower.</p></li>
+<li><p>If we haven’t reached the destination and haven’t exceeded the allowed number of stops (k), we extend our search by adding all possible next steps (flights) from the current city to the list l.</p></li>
+</ul>
+<p><b>Result:</b></p>
+<p>After exploring all possible routes within the allowed number of stops, we return the cheapest price found. If no valid route was found, we return -1</p>
+<h3> 4.2.3 Code </h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">findCheapestPrice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">flights</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+        <span class="n">NO_ROUTE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">frs</span><span class="p">,</span> <span class="n">tos</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">),</span> <span class="nb">set</span><span class="p">()</span> <span class="c1">## convert flights to dictionary/set form</span>
+        <span class="n">flights</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">fr</span><span class="p">,</span><span class="n">to</span><span class="p">,</span><span class="n">price</span> <span class="ow">in</span> <span class="n">flights</span><span class="p">:</span>
+            <span class="n">frs</span><span class="p">[</span><span class="n">fr</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">to</span><span class="p">,</span> <span class="n">price</span><span class="p">])</span>
+            <span class="n">tos</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">src</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">frs</span> <span class="ow">or</span> <span class="n">dst</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tos</span><span class="p">:</span> <span class="k">return</span> <span class="n">NO_ROUTE</span> <span class="c1">## early exit</span>
+        
+        <span class="n">cheapest</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="p">[[</span><span class="n">t</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="n">frs</span><span class="p">[</span><span class="n">src</span><span class="p">]]</span>
+        <span class="k">while</span> <span class="n">l</span><span class="p">:</span> <span class="c1">## dfs</span>
+            <span class="n">to</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">price</span><span class="o">&gt;=</span><span class="n">cheapest</span><span class="p">:</span> <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">to</span><span class="o">==</span><span class="n">dst</span><span class="p">:</span> 
+                <span class="n">cheapest</span> <span class="o">=</span> <span class="n">price</span>
+            <span class="k">elif</span> <span class="n">stop</span><span class="o">&lt;</span><span class="n">k</span> <span class="ow">and</span> <span class="n">to</span> <span class="ow">in</span> <span class="n">frs</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">t</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="n">frs</span><span class="p">[</span><span class="n">to</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">price</span><span class="o">+</span><span class="n">p</span><span class="o">&lt;</span><span class="n">cheapest</span><span class="p">:</span>
+                        <span class="n">l</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">t</span><span class="p">,</span> <span class="n">price</span><span class="o">+</span><span class="n">p</span><span class="p">,</span> <span class="n">stop</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">cheapest</span> <span class="k">if</span> <span class="n">cheapest</span><span class="o">!=</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">NO_ROUTE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h3> 4.3 Problem 3 : Reachable Nodes In Subdivided Graph</h3><h3> 4.3.1 Problem Statement</h3><p>You are given an undirected graph (the “original graph”) with n nodes labeled from 0 to n - 1. You decide to subdivide each edge in the graph into a chain of nodes, with the number of new nodes varying between each edge.</p>
+<p>The graph is given as a 2D array of <i>edges</i> where <i>edges[i] = [ui, vi, cnti]</i> indicates that there is an edge between nodes <i>ui</i> and <i>vi </i>in the original graph, and <i>cnti</i> is the total number of new nodes that you will subdivide the edge into. Note that <i>cnti == 0</i> means you will not subdivide the edge.</p>
+<p>To subdivide the edge <i>[ui, vi]</i>, replace it with <i>(cnti + 1)</i> new edges and cnti new nodes. The new nodes are <i>x1, x2, …, xcnti,</i> and the new edges are <i>[ui, x1], [x1, x2], [x2, x3], …, [xcnti-1, xcnti], [xcnti, vi]</i>.</p>
+<p>In this new graph, you want to know how many nodes are reachable from the node 0, where a node is reachable if the distance is <i>maxMoves</i> or less.</p>
+<p>Given the original graph and <i>maxMoves</i>, return the number of nodes that are reachable from node 0 in the new graph</p>
+<p><b> Example: </b>
+<img src="https://s3-lc-upload.s3.amazonaws.com/uploads/2018/08/01/origfinal.png" width=600></p>
+<p><b>Input:</b> edges = [[0,1,10],[0,2,1],[1,2,2]], maxMoves = 6, n = 3</p>
+<p><b>Output:</b> 13</p>
+<p><b>Explanation:</b> The edge subdivisions are shown in the image above.
+The nodes that are reachable are highlighted in yellow.</p>
+<h3> 4.3.2 Intuition </h3><p><b>Initialize the Graph:</b></p>
+<ul class="simple">
+<li><p>Convert the edge list into an adjacency matrix (graph) where each cell represents the number of intermediate nodes along the edge.</p></li>
+</ul>
+<p><b>Priority Queue Initialization:</b></p>
+<ul class="simple">
+<li><p>Initialize a priority queue with the starting node and the total moves available (M). The moves are stored as negative values to simulate a max-heap using Python’s heapq.</p></li>
+</ul>
+<p><b>Graph Traversal:</b></p>
+<ul class="simple">
+<li><p>Pop the node with the highest remaining moves from the priority queue.</p></li>
+<li><p>If this node has already been visited, skip it.</p></li>
+<li><p>Mark the node as visited and increment the result counter.</p></li>
+<li><p>For each neighboring node, if it hasn’t been visited and there are enough moves to traverse the edge, push the neighbor into the priority queue with updated moves.</p></li>
+<li><p>Update the result by counting the reachable intermediate nodes along each edge.</p></li>
+</ul>
+<p><b>Return the Result:</b></p>
+<ul class="simple">
+<li><p>After processing all nodes that can be reached within the given moves, return the total count of reachable nodes.</p></li>
+</ul>
+<h3> 4.3.3 Code <h3><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">heapq</span>
+
+<span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">reachableNodes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edges</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+        <span class="n">graph</span> <span class="o">=</span> <span class="p">[[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">graph</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">pq</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">M</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">N</span>
+        
+        <span class="k">while</span> <span class="n">pq</span><span class="p">:</span>
+            <span class="n">move</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="o">-</span><span class="n">move</span>
+            
+            <span class="k">if</span> <span class="n">visited</span><span class="p">[</span><span class="n">start</span><span class="p">]:</span>
+                <span class="k">continue</span>
+            
+            <span class="n">visited</span><span class="p">[</span><span class="n">start</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="mi">1</span>
+            
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">move</span> <span class="o">&gt;</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">visited</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                        <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">move</span> <span class="o">-</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="p">))</span>
+                    <span class="n">graph</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">start</span><span class="p">]</span> <span class="o">-=</span> <span class="nb">min</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span><span class="n">move</span><span class="p">,</span> <span class="n">graph</span><span class="p">[</span><span class="n">start</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<h3> Conclusion <h3><p>A key component of computer science, graph algorithms provide sophisticated answers to a broad range of real-world issues. You can overcome obstacles in both academic and professional settings by becoming an expert in these algorithms and their applications. Continuing with the exploration and experimentation of graph algorithms, we hope you will build upon the groundwork covered in this chapter.</p>
+<p>Understanding graph algorithms of shortest path problems has wide-ranging applications in various fields as Transportation and Logistics, Computer Networks, Social Networks and Economics and Finance. Furthemore, even though we have discussed a number of significant graph algorithmic themes, there are still a ton of more complex subjects to delve into as Graph theory and Machine Learning using Graphs.</p>
+<h3> Concepts/Topics/Materials to read next </h3><p><a class="reference external" href="https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/">https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/</a></p>
+<p><a class="reference external" href="https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/">https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/</a></p>
+<p><a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/1565664">https://ieeexplore.ieee.org/abstract/document/1565664</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Chapter: Graph Traversals</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter9.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">10. Recursion, Backtracking, Recurrence Relations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

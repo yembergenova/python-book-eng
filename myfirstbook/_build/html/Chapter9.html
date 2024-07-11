@@ -1,0 +1,1150 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. Recursion, Backtracking, Recurrence Relations &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter9';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. Dynamic programming" href="Chapter10.html" />
+    <link rel="prev" title="Graph Shortest Paths" href="Chapter8.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter9.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter9.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10. Recursion, Backtracking, Recurrence Relations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-recursion-backtracking-recurrence-relations">10.1 About Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-recursion">10.2 Concept 1: Recursion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">10.2.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">10.2.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">10.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-backtracking">10.3 Concept 2: Backtracking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">10.3.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.3.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-3-recurrence-relations">10.4 Concept 3: Recurrence Relations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.4.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.4.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-recursion-backtracking-recurrence-relations">10.5 LeetCode Problems related to “Recursion, Backtracking, Recurrence Relations”</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-generate-parentheses-leetcode-problem-22">10.5.1 Problem 1: Generate Parentheses (LeetCode Problem #22)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">10.5.1.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.5.1.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.5.1.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-subsets-leetcode-problem-78">10.5.2 Problem 2: Subsets (LeetCode Problem #78)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5.2.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.5.2.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.5.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-permutations-leetcode-problem-46">10.5.3 Problem 3: Permutations (LeetCode Problem #46)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">10.5.3.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">10.5.3.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">10.5.3.3 Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">10.6 Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read-next">10.7 What to read next</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming">1. Dynamic Programming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-and-conquer-algorithms">2. Divide and Conquer Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-algorithms">3. Graph Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorial-optimization">4. Combinatorial Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-recurrence-relations">5. Advanced Recurrence Relations</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="recursion-backtracking-recurrence-relations">
+<h1>10. Recursion, Backtracking, Recurrence Relations<a class="headerlink" href="#recursion-backtracking-recurrence-relations" title="Link to this heading">#</a></h1>
+<section id="about-recursion-backtracking-recurrence-relations">
+<h2>10.1 About Recursion, Backtracking, Recurrence Relations<a class="headerlink" href="#about-recursion-backtracking-recurrence-relations" title="Link to this heading">#</a></h2>
+<p>Recursion, backtracking, and recurrence relations represent fundamental pillars in computer science and mathematics, serving as quintessential tools for problem solving, algorithm design, and analysis. This work focuses on the intricacies of these concepts, revealing their underlying principles, applications, and significance in computational paradigms. Through a comprehensive survey and analysis, we reveal the profound implications of recursion, a systematic approach to backtracking, and the mathematical elegance of recurrence relations. Combining theoretical insights with practical examples, we elucidate how these concepts synergistically contribute to the design of efficient algorithms and enable the solution of complex computational problems. Furthermore, we clarify the interplay between these concepts, demonstrating their complementary roles in problem-solving strategies and algorithmic optimization. Ultimately, this work serves as a comprehensive guide for researchers, practitioners, and enthusiasts seeking to harness the power of recursion, backtracking, and recurrence relations in their computational endeavors.</p>
+<img src="https://www.scaler.com/topics/images/recursion-backtracking_Thumbnail.webp" /></section>
+<hr class="docutils" />
+<section id="concept-1-recursion">
+<h2>10.2 Concept 1: Recursion<a class="headerlink" href="#concept-1-recursion" title="Link to this heading">#</a></h2>
+<section id="intuition">
+<h3>10.2.1 Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<p>Recursion is a powerful tool in programming, where a function solves a problem by reducing it to smaller instances of the same problem. This method is particularly useful for tasks that can be broken down into similar sub-tasks. Recursion involves two main components:</p>
+<ol class="arabic simple">
+<li><p>Base Case: This is the condition under which the recursive calls stop. Without a base case, the function would call itself indefinitely, leading to a stack overflow.</p></li>
+<li><p>Recursive Case: This involves the function calling itself with modified parameters, gradually working towards the base case.</p></li>
+</ol>
+</section>
+<section id="example">
+<h3>10.2.2 Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>The factorial of a number 𝑛 n (denoted as 𝑛 ! n!) is the product of all positive integers less than or equal to 𝑛 n. The factorial can be defined recursively:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>* Base Case: 1 ! = 1 1!=1
+* Recursive Case: 𝑛 ! = 𝑛 × ( 𝑛 − 1 ) ! n!=n×(n−1)!
+</pre></div>
+</div>
+<p><strong>Step-by-Step Explanation</strong></p>
+<p>Let’s see how factorial(5) is computed:</p>
+<ol class="arabic simple">
+<li><p>factorial(5)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Calls factorial(4)</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>factorial(4)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Calls factorial(3)</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>factorial(3)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Calls factorial(2)</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>factorial(2)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Calls factorial(1)</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>factorial(1)</p></li>
+</ol>
+<ul class="simple">
+<li><p>Returns 1 (base case reached)</p></li>
+</ul>
+<p>Now, the function returns values back up the call stack:</p>
+<ul class="simple">
+<li><p>factorial(2) returns 2×1=2</p></li>
+<li><p>factorial(3) returns 3×2=6</p></li>
+<li><p>factorial(4) returns 4×6=24</p></li>
+<li><p>factorial(5) returns 5×24=120</p></li>
+</ul>
+<p><strong>Visualization</strong></p>
+<p>This diagram illustrates the process:</p>
+<ul class="simple">
+<li><p>The arrows show the flow of recursive calls from factorial(5) down to factorial(1).</p></li>
+<li><p>The return path shows how the computed values are returned back up the call stack, ultimately resulting in the final answer for factorial(5).</p></li>
+</ul>
+<p><strong>Advantages and Disadvantages of Recursion</strong></p>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Simpler Code: Recursive solutions are often more elegant and easier to understand for problems that naturally fit a recursive pattern (e.g., tree traversal, factorial computation).</p></li>
+<li><p>Divide and Conquer: Recursion is a natural fit for divide-and-conquer algorithms, where a problem is broken down into smaller sub-problems.</p></li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul class="simple">
+<li><p>Performance: Recursive solutions can be less efficient due to function call overhead and can lead to excessive memory use due to call stack growth.</p></li>
+<li><p>Complexity: Understanding and debugging recursive functions can be more challenging, especially when multiple recursive calls are involved.</p></li>
+</ul>
+<img src="https://wpminers.com/wp-content/uploads/2022/09/recursive-function.png" />
+</section>
+<section id="code">
+<h3>10.2.3 Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Base case</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Recursive call</span>
+
+
+<span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concept-2-backtracking">
+<h2>10.3 Concept 2: Backtracking<a class="headerlink" href="#concept-2-backtracking" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>10.3.1 Intuition<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><strong>Backtracking</strong> is an algorithmic technique used for solving problems recursively by trying to build a solution incrementally, one piece at a time, and removing solutions that fail to satisfy the constraints of the problem at any point in time. It is particularly useful for solving constraint satisfaction problems like puzzles, permutations, and combinations.</p>
+<p><strong>Key Concepts of Backtracking</strong></p>
+<ul class="simple">
+<li><p>Choice: Making a choice among multiple options.</p></li>
+<li><p>Constraint: Checking if the current choice leads to a solution or violates the constraints.</p></li>
+<li><p>Solution: If the choice leads to a solution, proceed; otherwise, backtrack by undoing the choice and try another option.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>10.3.2 Example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Consider a maze represented by a grid where some cells are blocked, and the goal is to find a path from the start to the end.</p>
+<p><strong>Step-by-Step Explanation</strong></p>
+<ol class="arabic simple">
+<li><p>Initialization: Start at the initial position (0,0).</p></li>
+<li><p>Recursive Exploration: Move in possible directions (down and right).</p></li>
+<li><p>Safety Check: Check if the move is valid (inside the maze and on a path).</p></li>
+<li><p>Base Case: If the end is reached, mark the path as part of the solution.</p></li>
+<li><p>Backtracking: If a move doesn’t lead to a solution, undo the move and try the next option.</p></li>
+</ol>
+<img src="https://www.researchgate.net/publication/323067430/figure/fig2/AS:689093398777857@1541304077879/Illustrative-view-to-visualize-Backtrack-Algorithm-for-4-Queens-Problem.ppm" />
+<p><strong>Detailed Explanation</strong></p>
+<p>Key Components</p>
+<ul class="simple">
+<li><p>Start Point: The initial position where the search begins.</p></li>
+<li><p>End Point: The goal position to reach.</p></li>
+<li><p>Blocked Cells: Cells that cannot be passed through.</p></li>
+<li><p>Path Cells: Cells that are part of the current path being explored.</p></li>
+</ul>
+<p>Steps in Backtracking</p>
+<ol class="arabic simple">
+<li><p>Move Forward: Starting from the initial position, the algorithm tries to move in possible directions (right and down in this example).</p></li>
+<li><p>Check Constraints: For each move, the algorithm checks if it is within the bounds of the maze and whether the cell is not blocked.</p></li>
+<li><p>Reaching the End: If the algorithm reaches the end point, the path is marked as a solution.</p></li>
+<li><p>Backtrack: If a move leads to a blocked cell or a dead end, the algorithm backtracks to the previous cell and tries a different path.</p></li>
+</ol>
+<p>Path Exploration</p>
+<ul class="simple">
+<li><p>The illustration shows arrows indicating the direction of movement.</p></li>
+<li><p>When the algorithm encounters a blocked cell or dead end, it backtracks, indicated by arrows going back to previous cells.</p></li>
+<li><p>The successful path to the end is eventually found and marked.</p></li>
+</ul>
+<p><strong>Advantages and Disadvantages of Backtracking</strong></p>
+<p>Advantages:</p>
+<ul class="simple">
+<li><p>Flexibility: Can solve a wide range of problems like puzzles, permutations, and combinations.</p></li>
+<li><p>Simplicity: Often easier to implement for problems with clear constraints.</p></li>
+</ul>
+<p>Disadvantages:</p>
+<ul class="simple">
+<li><p>Efficiency: Can be inefficient for large problems due to the exponential number of possible solutions.</p></li>
+<li><p>Complexity: Managing the state and backtracking can become complex for intricate problems.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>10.3.3 Code<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">is_safe</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">solve_maze</span><span class="p">(</span><span class="n">maze</span><span class="p">):</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">solve_maze_util</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No solution exists&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">solution</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">solve_maze_util</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">y</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">maze</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">maze</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">solution</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">is_safe</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">solution</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">solve_maze_util</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">solve_maze_util</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">solution</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+<span class="c1"># Example maze (1 = open path, 0 = blocked)</span>
+<span class="n">maze</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="n">solve_maze</span><span class="p">(</span><span class="n">maze</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 0, 0, 0]
+[1, 1, 0, 0]
+[0, 1, 0, 0]
+[0, 1, 1, 1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="concept-3-recurrence-relations">
+<h2>10.4 Concept 3: Recurrence Relations<a class="headerlink" href="#concept-3-recurrence-relations" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>10.4.1 Intuition<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>A recurrence relation is a mathematical formula that defines each term of a sequence in terms of the preceding terms. They are widely used in computer science for analyzing the time complexity of recursive algorithms and for defining sequences in mathematics.</p>
+<p><strong>Key Concepts</strong></p>
+<ul class="simple">
+<li><p>Initial Conditions: The starting values of the sequence.</p></li>
+<li><p>Recurrence Formula: The equation that relates a term to its predecessors.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>10.3.2 Example<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>The Fibonacci sequence is a series of numbers where each number (after the first two) is the sum of the two preceding ones. The sequence commonly starts with 0 and 1. The recurrence relation defining the Fibonacci sequence is:</p>
+<p>𝐹 ( 𝑛 ) = 𝐹 ( 𝑛 − 1 ) + 𝐹 ( 𝑛 − 2 )</p>
+<p>with initial conditions:</p>
+<p>𝐹 ( 0 ) = 0</p>
+<p>𝐹 ( 1 ) = 1</p>
+<p>Let’s calculate the first few Fibonacci numbers using this recurrence relation:</p>
+<ul class="simple">
+<li><p>𝐹(0)=0</p></li>
+<li><p>𝐹(1)=1</p></li>
+<li><p>𝐹(2)=𝐹(1)+𝐹(0)=1+0=1</p></li>
+<li><p>𝐹(3)=𝐹(2)+𝐹(1)=1+1=2</p></li>
+<li><p>𝐹(4)=𝐹(3)+𝐹(2)=2+1=3</p></li>
+<li><p>𝐹(5)=𝐹(4)+𝐹(3)=3+2=5</p></li>
+<li><p>𝐹(6)=𝐹(5)+𝐹(4)=5+3=8</p></li>
+<li><p>𝐹(7)=𝐹(6)+𝐹(5)=8+5=13</p></li>
+<li><p>𝐹(8)=𝐹(7)+𝐹(6)=13+8=21</p></li>
+</ul>
+<p>Here is the visualization of the first 10 Fibonacci numbers:</p>
+<ul class="simple">
+<li><p>The x-axis represents the index n.</p></li>
+<li><p>The y-axis represents the corresponding Fibonacci number F(n).</p></li>
+</ul>
+<p>The plot shows the characteristic exponential growth of the Fibonacci sequence, where each point represents a Fibonacci number calculated using the recurrence relation
+F(n)=F(n−1)+F(n−2).</p>
+</section>
+<section id="id6">
+<h3>10.4.3 Code<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Generate the first 10 Fibonacci numbers</span>
+<span class="n">fib_sequence</span> <span class="o">=</span> <span class="p">[</span><span class="n">fibonacci</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="c1"># Plot the Fibonacci sequence</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">fib_sequence</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Fibonacci Sequence&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fibonacci Number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="leetcode-problems-related-to-recursion-backtracking-recurrence-relations">
+<h2>10.5 LeetCode Problems related to “Recursion, Backtracking, Recurrence Relations”<a class="headerlink" href="#leetcode-problems-related-to-recursion-backtracking-recurrence-relations" title="Link to this heading">#</a></h2>
+<section id="problem-1-generate-parentheses-leetcode-problem-22">
+<h3>10.5.1 Problem 1: Generate Parentheses (LeetCode Problem #22)<a class="headerlink" href="#problem-1-generate-parentheses-leetcode-problem-22" title="Link to this heading">#</a></h3>
+<section id="problem-statement">
+<h4>10.5.1.1 Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h4>
+<p>Given ( n ) pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</p>
+</section>
+<section id="id7">
+<h4>10.5.1.2 Intuition<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<p>Use backtracking to generate all valid combinations by ensuring that at any point, the number of closing parentheses does not exceed the number of opening parentheses.</p>
+</section>
+<section id="id8">
+<h4>10.5.1.3 Code<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate Parentheses using backtracking</span>
+
+<span class="k">def</span> <span class="nf">generate_parentheses</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">right</span> <span class="o">&lt;</span> <span class="n">left</span><span class="p">:</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">backtrack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">generate_parentheses</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># Output: [&quot;((()))&quot;,&quot;(()())&quot;,&quot;(())()&quot;,&quot;()(())&quot;,&quot;()()()&quot;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;((()))&#39;, &#39;(()())&#39;, &#39;(())()&#39;, &#39;()(())&#39;, &#39;()()()&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-2-subsets-leetcode-problem-78">
+<h3>10.5.2 Problem 2: Subsets (LeetCode Problem #78)<a class="headerlink" href="#problem-2-subsets-leetcode-problem-78" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h4>10.5.2.1 Problem statement<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<p>Given an integer array <code class="docutils literal notranslate"><span class="pre">nums</span></code> of unique elements, return all possible subsets (the power set).</p>
+</section>
+<section id="id10">
+<h4>10.5.2.2 Intuition<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<p>Use backtracking to explore all possible subsets by including or excluding each element.</p>
+</section>
+<section id="id11">
+<h4>10.5.2.3 Code<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Subsets using backtracking</span>
+
+<span class="k">def</span> <span class="nf">subsets</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">path</span> <span class="o">+</span> <span class="p">[</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span>
+    <span class="n">backtrack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subsets</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>  <span class="c1"># Output: [[],[1],[1,2],[1,2,3],[1,3],[2],[2,3],[3]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="problem-3-permutations-leetcode-problem-46">
+<h3>10.5.3 Problem 3: Permutations (LeetCode Problem #46)<a class="headerlink" href="#problem-3-permutations-leetcode-problem-46" title="Link to this heading">#</a></h3>
+<section id="id12">
+<h4>10.5.3.1 Problem statement<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<p>Given an array <code class="docutils literal notranslate"><span class="pre">nums</span></code> of distinct integers, return all possible permutations.</p>
+</section>
+<section id="id13">
+<h4>10.5.3.2 Intuition<a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<p>Use backtracking to generate all permutations by swapping elements.</p>
+</section>
+<section id="id14">
+<h4>10.5.3.3 Code<a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Permutations using backtracking</span>
+
+<span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">def</span> <span class="nf">backtrack</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nums</span><span class="p">[:])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+            <span class="n">backtrack</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="n">start</span><span class="p">]</span>
+    <span class="n">backtrack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">permute</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>  <span class="c1"># Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="conclusion">
+<h2>10.6 Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Recursion, backtracking, and recurrence relations are powerful techniques in algorithm design and problem-solving. Each has unique strengths and applications:</p>
+<ul class="simple">
+<li><p><strong>Recursion</strong> breaks down complex problems into simpler subproblems.</p>
+<ul>
+<li><p>Example: Factorial calculation and Fibonacci sequence.</p></li>
+</ul>
+</li>
+<li><p><strong>Backtracking</strong> systematically explores all possible solutions for constraint satisfaction problems.</p>
+<ul>
+<li><p>Example: Sudoku solver, generating well-formed parentheses, and subsets/permutations.</p></li>
+</ul>
+</li>
+<li><p><strong>Recurrence Relations</strong> provide a mathematical framework for defining problems in terms of their subproblems and analyzing the time complexity of recursive algorithms.</p>
+<ul>
+<li><p>Example: Recurrence relation for the Fibonacci sequence.</p></li>
+</ul>
+</li>
+</ul>
+<p>By mastering these techniques, you are well-equipped to tackle a wide range of computational challenges, solve classic algorithmic problems, optimize solutions, and analyze time complexity effectively.</p>
+</section>
+<section id="what-to-read-next">
+<h2>10.7 What to read next<a class="headerlink" href="#what-to-read-next" title="Link to this heading">#</a></h2>
+<p>Having explored recursion, backtracking, and recurrence relations, it is essential to expand your knowledge to other fundamental topics in computer science and algorithms. These topics build on the principles you’ve learned and introduce new techniques and applications, enabling you to tackle a wider range of problems with greater efficiency and insight. By diving into the following topics, you’ll gain a deeper understanding of how to solve complex problems, optimize solutions, and analyze algorithms effectively.</p>
+<section id="dynamic-programming">
+<h3>1. Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Dynamic programming (DP) is a method for solving complex problems by breaking them down into simpler subproblems and solving each subproblem just once, storing their solutions. It is particularly useful for optimization problems.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> The Fibonacci sequence and the knapsack problem, where DP optimizes the recursive approach by storing intermediate results.</p></li>
+<li><p><strong>Applications:</strong> Widely used in various fields such as operations research, economics, bioinformatics, and more.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Helps in solving problems with overlapping subproblems and optimal substructure efficiently.</p></li>
+<li><p>Enhances problem-solving skills by introducing memoization and tabulation techniques.</p></li>
+</ul>
+</section>
+<section id="divide-and-conquer-algorithms">
+<h3>2. Divide and Conquer Algorithms<a class="headerlink" href="#divide-and-conquer-algorithms" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Divide and conquer is an algorithmic paradigm that solves a problem by breaking it into smaller subproblems, solving each subproblem recursively, and combining their solutions to solve the original problem.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> Merge sort and quicksort, where the problem of sorting an array is divided into smaller subproblems of sorting subarrays.</p></li>
+<li><p><strong>Applications:</strong> Used in various algorithms for sorting, searching, and multiplication of large numbers.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Provides a framework for designing efficient algorithms.</p></li>
+<li><p>Helps in understanding the recursive decomposition of problems and the concept of conquering subproblems.</p></li>
+</ul>
+</section>
+<section id="graph-algorithms">
+<h3>3. Graph Algorithms<a class="headerlink" href="#graph-algorithms" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Graph algorithms are essential for solving problems related to networks, relationships, and connectivity. Depth-First Search (DFS) and Breadth-First Search (BFS) are fundamental graph traversal algorithms.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> DFS and BFS for traversing or searching tree or graph data structures.</p></li>
+<li><p><strong>Applications:</strong> Used in social network analysis, computer networks, pathfinding, and more.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Helps in solving complex problems involving graphs, such as shortest paths, connectivity, and cycle detection.</p></li>
+<li><p>Enhances understanding of graph theory and its applications in real-world problems.</p></li>
+</ul>
+</section>
+<section id="combinatorial-optimization">
+<h3>4. Combinatorial Optimization<a class="headerlink" href="#combinatorial-optimization" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Combinatorial optimization involves finding an optimal object from a finite set of objects. It is widely used in fields where optimization is crucial.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> The traveling salesman problem and the minimum spanning tree problem.</p></li>
+<li><p><strong>Applications:</strong> Used in operations research, economics, logistics, and more.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Provides techniques for optimizing complex problems involving discrete objects.</p></li>
+<li><p>Helps in understanding the theory and algorithms behind finding optimal solutions in various domains.</p></li>
+</ul>
+</section>
+<section id="advanced-recurrence-relations">
+<h3>5. Advanced Recurrence Relations<a class="headerlink" href="#advanced-recurrence-relations" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Advanced recurrence relations help in analyzing the time complexity of algorithms and solving more complex problems defined by recursive relations.</p>
+<ul class="simple">
+<li><p><strong>Example:</strong> Solving recurrence relations using methods like the Master Theorem.</p></li>
+<li><p><strong>Applications:</strong> Used in analyzing the performance of divide-and-conquer algorithms and dynamic programming.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Enhances understanding of the mathematical foundations of algorithms.</p></li>
+<li><p>Provides tools for analyzing and solving recursive problems more effectively.</p></li>
+</ul>
+<p>Exploring these topics will deepen your understanding of algorithm design and analysis. Each topic builds on the principles of recursion, backtracking, and recurrence relations, providing you with advanced tools and techniques to tackle a broader range of problems. By mastering these concepts, you’ll be well-equipped to solve complex computational challenges, optimize solutions, and understand the underlying structures of various algorithms.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter8.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Graph Shortest Paths</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter10.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">10. Dynamic programming</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-recursion-backtracking-recurrence-relations">10.1 About Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-recursion">10.2 Concept 1: Recursion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">10.2.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">10.2.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">10.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-backtracking">10.3 Concept 2: Backtracking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">10.3.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.3.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-3-recurrence-relations">10.4 Concept 3: Recurrence Relations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.4.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.4.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-recursion-backtracking-recurrence-relations">10.5 LeetCode Problems related to “Recursion, Backtracking, Recurrence Relations”</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-generate-parentheses-leetcode-problem-22">10.5.1 Problem 1: Generate Parentheses (LeetCode Problem #22)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">10.5.1.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.5.1.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.5.1.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-subsets-leetcode-problem-78">10.5.2 Problem 2: Subsets (LeetCode Problem #78)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.5.2.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.5.2.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.5.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-permutations-leetcode-problem-46">10.5.3 Problem 3: Permutations (LeetCode Problem #46)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">10.5.3.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">10.5.3.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">10.5.3.3 Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">10.6 Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read-next">10.7 What to read next</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming">1. Dynamic Programming</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#divide-and-conquer-algorithms">2. Divide and Conquer Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graph-algorithms">3. Graph Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combinatorial-optimization">4. Combinatorial Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-recurrence-relations">5. Advanced Recurrence Relations</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

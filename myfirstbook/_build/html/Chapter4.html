@@ -1,0 +1,1030 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter 4 &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter4';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter: Arrays and Pointers" href="Chapter5.html" />
+    <link rel="prev" title="Table of contents" href="Chapter3.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter4.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter4.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter 4</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 4</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-linear-data-structures-hash-tables">Data Structures: Linear Data Structures, Hash Tables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents"><font color="3E5C76">Table of contents<font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-intuition"><font color="3C6E71">1. Motivation/Intuition<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-structures">What is Data structures?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-them">Why Do We Need Them?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-data-structures">Types of Data Structures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-data-structures"><font color="3C6E71">2. Linear Data Structures<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-linear-data-structure-and-types-in-linear-data-structure">What Is Linear Data Structure? and Types in Linear Data Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear data structures:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list"><font color="16425B">1. Linked List <font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack"><font color="16425B">2. Stack <font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue"><font color="16425B">3. Queue <font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hash-tables"><font color="3C6E71">3. Hash Tables<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-hash-tables">What Is Hash Tables?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-this-topic"><font color="3C6E71">4. Leetcode Problems related to this topic<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-remove-duplicates-from-sorted-list">Problem 1: Remove Duplicates from Sorted List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-two-sum">Problem 2: Two Sum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-palindrome-linked-list">Problem 3: Palindrome Linked List</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><font color="3C6E71">5. Conclusion<font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-materials-to-read-next"><font color="3C6E71">6. Topics/Materials to read next<font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="chapter-4">
+<h1>Chapter 4<a class="headerlink" href="#chapter-4" title="Link to this heading">#</a></h1>
+</section>
+<section id="data-structures-linear-data-structures-hash-tables">
+<h1>Data Structures: Linear Data Structures, Hash Tables<a class="headerlink" href="#data-structures-linear-data-structures-hash-tables" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="table-of-contents">
+<h2><font color='3E5C76'>Table of contents<font><a class='anchor' id='top'></a><a class="headerlink" href="#table-of-contents" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#motivation"><span class="xref myst">Motivation/Intuition</span></a></p></li>
+<li><p><a class="reference internal" href="#linear-data-structures"><span class="xref myst">Concept 1: Linear Data Structures</span></a></p></li>
+<li><p><a class="reference internal" href="#hash-tables"><span class="xref myst">Concept 2: Hash Tables</span></a></p></li>
+<li><p><a class="reference internal" href="#leetcode-problems"><span class="xref myst">Leetcode Problems related to this topic</span></a></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="#problem-1"><span class="xref myst">Problem 1</span></a></p></li>
+<li><p><a class="reference internal" href="#problem-2"><span class="xref myst">Problem 2</span></a></p></li>
+<li><p><a class="reference internal" href="#problem-3"><span class="xref myst">Problem 3</span></a></p></li>
+</ol>
+</li>
+<li><p><a class="reference internal" href="#conclusion"><span class="xref myst">Conclusion</span></a></p></li>
+<li><p><a class="reference internal" href="#next-concepts"><span class="xref myst">Topics/Materials to read next</span></a></p></li>
+</ol>
+<hr class="docutils" />
+<p><a id="motivation"></a></p>
+</section>
+</section>
+<section id="motivation-intuition">
+<h1><font color='3C6E71'>1. Motivation/Intuition<font><a class='anchor' id='top'></a><a class="headerlink" href="#motivation-intuition" title="Link to this heading">#</a></h1>
+<div style="padding-right:60px">
+<section id="what-is-data">
+<h2>What is Data?<a class="headerlink" href="#what-is-data" title="Link to this heading">#</a></h2>
+<p>Before diving into data structures, let’s understand the data itself.
+In common usage, data (<a class="reference external" href="https://en.wikipedia.org/wiki/Data">source</a>) is a collection of discrete or continuous values that convey information. These values can describe quantities, qualities, facts, statistics, and other fundamental units of meaning. They can also simply consist of sequences of symbols that may require further formal interpretation.</p>
+<img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*y3095_m-i41raJC94l01qA.jpeg" alt="Containiner with value" width="200" style="float:left; margin-right:20px;"/>
+</section>
+<section id="what-is-data-structures">
+<h2>What is Data structures?<a class="headerlink" href="#what-is-data-structures" title="Link to this heading">#</a></h2>
+<p>Now that we understand what data is, let’s move on to data structures.</p>
+<p>Data structures are essentially specialized formats for <em>organizing</em>, <em>processing</em>, and <em>storing</em> data to facilitate efficient <em>access</em> and <em>modification</em>. Picture them as containers that hold and organize data in a specific manner.</p>
+<img src="https://media.istockphoto.com/id/465843229/vector/document-cabinet-cartoon.jpg?b=1&s=612x612&w=0&k=20&c=ZhRBHIMZIicbm22kTF4y-rWmearoLSKiacH_4wuyJ_4=" alt="Containiner with value" width="200" style="float:right;"/>
+<section id="why-do-we-need-them">
+<h3>Why Do We Need Them?<a class="headerlink" href="#why-do-we-need-them" title="Link to this heading">#</a></h3>
+<p>Data structures are crucial because they provide efficient ways to manage data, enhancing the performance of algorithms and operations performed on that data. Imagine trying to find a specific piece of information in a disorganized room versus a neatly arranged filing cabinet – data structures provide that organization.</p>
+</section>
+<section id="types-of-data-structures">
+<h3>Types of Data Structures<a class="headerlink" href="#types-of-data-structures" title="Link to this heading">#</a></h3>
+<p>There are various types of data structures, each with its unique characteristics and applications. Here are some common ones:</p>
+<ol class="arabic simple">
+<li><p><strong>Linear Data Structures:</strong> These structures organize data in a sequential manner, where each element is connected to its previous and next elements. Examples include arrays, linked lists, stacks, and queues.</p></li>
+<li><p><strong>Hash Tables:</strong> Hash tables utilize a hash function to map keys to values, enabling rapid retrieval of data based on its key. They are particularly useful for quick data lookup operations.</p></li>
+<li><p><strong>Trees:</strong> Trees are hierarchical data structures composed of nodes, where each node can have zero or more child nodes. Examples include binary trees, AVL trees, and B-trees.</p></li>
+<li><p><strong>Graphs:</strong> Graphs represent connections between entities, where each connection is represented by an edge. They are used to model complex relationships in various domains, such as social networks and transportation systems.</p></li>
+</ol>
+<p>Each type of data structure has its own strengths and weaknesses, which make them better suited for different tasks. Understanding these differences is really important for using data structures well, making code run smoothly, and solving problems effectively. In this chapter, we’re going to take a close look at Linear Data Structures and Hash Tables. We’ll dig into how they work and learn how to use them effectively.</p>
+</div>
+<div style = "margin-bottom: 0px"></div>
+<hr class="docutils" />
+<p><a id="linear-data-structures"></a></p>
+</section>
+</section>
+</section>
+<section id="linear-data-structures">
+<h1><font color='3C6E71'>2. Linear Data Structures<font><a class='anchor' id='top'></a><a class="headerlink" href="#linear-data-structures" title="Link to this heading">#</a></h1>
+<div style="padding-right:60px">
+Before it you've delved into the world of data, explored various types of data structures, and understood their significance, we're ready to take the next step. In this paragraph, we'll delve deeper into linear data structures and their different types.<br>
+<br>
+<img src="https://img.freepik.com/premium-vector/monochrome-image-round-beads-string-needlework-collection-vector-cartoon_543641-1918.jpg?w=740" alt="Containiner with value" width="200" style="float:right;"/>
+<section id="what-is-linear-data-structure-and-types-in-linear-data-structure">
+<h2>What Is Linear Data Structure? and Types in Linear Data Structure<a class="headerlink" href="#what-is-linear-data-structure-and-types-in-linear-data-structure" title="Link to this heading">#</a></h2>
+<p>Linear data structures are a fundamental computer science concept that provide a simple way to organize data in a sequential or linearly manner. Imagine an arrangement of data elements, like beads on a string, where each bead is connected to the previous and subsequent ones, except those at the very beginning and end. This sequential arrangement allows you to easily move from one element to another, almost like turning the pages of a book. Because computer memory is linear, these structures are easy to implement, making them accessible to programmers of all levels.</p>
+<p>Examples of linear data structures include <em>arrays</em>, <em>linked lists</em>, <em>stacks</em>, and <em>queues</em>, each of which serves a different purpose in organizing and managing data.</p>
+</div><div style="padding-right:60px">
+</section>
+<section id="id1">
+<h2>Linear data structures:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="linked-list">
+<h3><font color='16425B'>1. Linked List <font><a class='anchor' id='top'></a><a class="headerlink" href="#linked-list" title="Link to this heading">#</a></h3>
+<p>Linked lists are linear data structures where each element, known as a node, holds a value and a reference to the next node in the sequence.</p>
+</div><div style="padding-right:60px">
+<p>There are 3 main types of linked lists:</p>
+<ul>
+<li><p><strong>Singly linked lists</strong>: nodes have only a next pointer.</p>
+<center><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200922124319/Singly-Linked-List1.png" alt="Singly linked lists" width="500"/></center>
+</li>
+<li><p><strong>Doubly linked lists</strong>: nodes have both next and previous pointers</p>
+<center><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200922124412/Doubly-Linked-List.png" alt="Doubly linked lists"  width="510"/></center>
+</li>
+<li><p><strong>Circular linked lists</strong>: first and the last nodes are also connected to each other to form a circle, there is no NULL at the end.</p>
+<center><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200922124456/Circular-Linked-List.png" alt="Circular linked lists"  width="550"/></center>
+</li>
+</ul>
+<p><strong>Complex Time:</strong></p>
+<ul class="simple">
+<li><p>Access: O(n)</p></li>
+<li><p>Search: O(n)</p></li>
+<li><p>Insertion: O(1) (at the beginning or end), O(n) (in the middle)</p></li>
+<li><p>Deletion: O(1) (if node is given), O(n) (if searching for node is needed)</p></li>
+</ul>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Significance</strong>: Linked lists are widely used in scenarios where dynamic memory allocation is required, such as implementing stacks, queues, and memory management in operating systems. A real-life example is a music playlist, where each song is linked to the next song in the playlist.</p>
+<p><strong>Code of Linked List in python:</strong></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>  <span class="c1"># Node class to create individual elements</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>  <span class="c1"># Initialize data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Initialize next pointer to None (default)</span>
+
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Initialize head pointer to None (empty list)</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>  <span class="c1"># Method to add a new node at the end of the list</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Create a new node</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span><span class="p">:</span>  <span class="c1"># If list is empty</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">new_node</span>  <span class="c1"># Set new node as head</span>
+            <span class="k">return</span>
+        <span class="n">last_node</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>  <span class="c1"># Traverse the list to find the last node</span>
+        <span class="k">while</span> <span class="n">last_node</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+            <span class="n">last_node</span> <span class="o">=</span> <span class="n">last_node</span><span class="o">.</span><span class="n">next</span>
+        <span class="n">last_node</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>  <span class="c1"># Attach new node to the last node&#39;s next pointer</span>
+
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to display the linked list</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>  <span class="c1"># Start from the head</span>
+        <span class="k">while</span> <span class="n">current</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; -&gt; &quot;</span><span class="p">)</span>  <span class="c1"># Print current node&#39;s data</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>  <span class="c1"># Move to the next node</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>  <span class="c1"># Print &quot;None&quot; when end of list is reached</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div style="padding-right:60px">
+</section>
+<section id="stack">
+<h3><font color='16425B'>2. Stack <font><a class='anchor' id='top'></a><a class="headerlink" href="#stack" title="Link to this heading">#</a></h3>
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221219100314/stack.drawio2.png" alt="LIFO"  style="float:right; margin-left:20px" width="400"/>
+A stack is a linear data structure that follows the Last-In-First-Out (LIFO) principle. Elements are added and removed from the same end, known as the top. Two kinds of operations can be attributed to the stack, i.e., the pushing and pop operation. Push is necessary for components that need to be added to the collection, and pop is employed when the component previously added needs to be removed from the collection. The extraction can be removed to add the final component.<br>
+<p><strong>Complex Time</strong>:</p>
+<ul class="simple">
+<li><p>Access: O(n)</p></li>
+<li><p>Search: O(n)</p></li>
+<li><p>Insertion (Push): O(1)</p></li>
+<li><p>Deletion (Pop): O(1)</p></li>
+</ul>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Significance</strong>: Stacks are used in various applications such as function call management in programming languages (function call stack), undo functionality in text editors, and handling backtracking in algorithms.</p>
+<p><strong>Code of Stack in python:</strong></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Stack</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize an empty list to store stack elements</span>
+
+    <span class="k">def</span> <span class="nf">push</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>  <span class="c1"># Method to add an element to the top of the stack</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c1"># Append the item to the list</span>
+
+    <span class="k">def</span> <span class="nf">pop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to remove and return the top element from the stack</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># Remove and return the last item from the list</span>
+
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to check if the stack is empty</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>  <span class="c1"># Return True if the list is empty, False otherwise</span>
+
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to return the top element of the stack without removing it</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Return the last item from the list</span>
+
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to return the number of elements in the stack</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Return the length of the list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div style="padding-right:60px">
+</section>
+<section id="queue">
+<h3><font color='16425B'>3. Queue <font><a class='anchor' id='top'></a><a class="headerlink" href="#queue" title="Link to this heading">#</a></h3>
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221213113312/Queue-Data-Structures.png" alt="FIFO"  style="float:right; margin-left:20px" width="400"/>
+A queue is a linear data structure that follows the First-In-First-Out (FIFO) principle. The exact sequence is followed to carry out the required actions by the components. The main difference between the queue and stacks lies in eliminating an element. It is in the area where the object that was added the most recently is removed first in the stack. At the same time, the case with a queue element that was initially added is removed first.
+<p>Both the end and the conclusion of the system are used for the removal of data and the addition of data. The two main operations that govern the structure of the queue are dequeue and enqueue. Enqueue refers to the procedure where the addition of a component is allowed to be used in creating data. And dequeue refers to the method where the removal of components is allowed. This is the primary aspect of the queue in this case.</p>
+<p><strong>Complex Time</strong>:</p>
+<ul class="simple">
+<li><p>Access: O(n)</p></li>
+<li><p>Search: O(n)</p></li>
+<li><p>Insertion (Enqueue): O(1)</p></li>
+<li><p>Deletion (Dequeue): O(1)</p></li>
+</ul>
+<p><strong>Space Complexity</strong>: O(n)</p>
+<p><strong>Significance</strong>: Queues are used in scenarios where tasks are processed in the order they arrive, such as job scheduling in operating systems, printer queues, and call center systems.</p>
+<p><strong>Code of Queue in python:</strong></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Queue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Initialize an empty list to store queue elements</span>
+
+    <span class="k">def</span> <span class="nf">enqueue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>  <span class="c1"># Method to add an element to the rear of the queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>  <span class="c1"># Append the item to the list</span>
+
+    <span class="k">def</span> <span class="nf">dequeue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to remove and return the front element from the queue</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Remove and return the first item from the list (front of the queue)</span>
+
+    <span class="k">def</span> <span class="nf">is_empty</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to check if the queue is empty</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>  <span class="c1"># Return True if the list is empty, False otherwise</span>
+
+    <span class="k">def</span> <span class="nf">peek</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to return the front element of the queue without removing it</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_empty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Return the first item from the list (front of the queue)</span>
+
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Method to return the number of elements in the queue</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>  <span class="c1"># Return the length of the list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><a id="hash-tables"></a></p>
+</section>
+</section>
+</section>
+<section id="hash-tables">
+<h1><font color='3C6E71'>3. Hash Tables<font><a class='anchor' id='top'></a><a class="headerlink" href="#hash-tables" title="Link to this heading">#</a></h1>
+<div style="padding-right:60px">
+Imagine stepping into a library where books are not arranged by title or author, but instead scattered randomly across shelves. How would you find the book you seek? This chaos mirrors the world of data storage without hash tables. But fear not! Hash tables are like the magical librarians of computing, bringing order to this chaos with their ingenious organization.
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20221220111537/ComponentsofHashing.png" alt="Containiner with value" width="400" style="float:right; margin: 50px 0 50px 50px"/>
+<section id="what-is-hash-tables">
+<h2>What Is Hash Tables?<a class="headerlink" href="#what-is-hash-tables" title="Link to this heading">#</a></h2>
+<p>Hash tables are akin to a clandestine vault, where each piece of information is securely locked away under a unique key. But here’s where the magic truly begins: instead of fumbling through endless shelves, a mystical algorithm swiftly guides us to the exact location of our treasure. Imagine the thrill as the index value generated from a hash function acts as the key to unlock the vault, granting us access to the coveted data within. That makes accessing the data faster. So the search and insertion function of a data element becomes also much faster as the key values themselves become the index of the array which stores the data.</p>
+<p><strong>Complexity Time:</strong></p>
+<ul class="simple">
+<li><p>Insertion: O(1)</p></li>
+<li><p>Deletion: O(1)</p></li>
+<li><p>Search: O(1)</p></li>
+</ul>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Significance:</strong>
+Hash tables are the backbone of modern computing, offering a versatile and efficient means of storing, retrieving, and manipulating data. They play a crucial role in various applications, including:</p>
+<ol class="arabic simple">
+<li><p><strong>Database Management:</strong> Hash tables are used to implement hash indexes, enabling quick retrieval of records based on their keys. This enhances the performance of database systems, allowing for rapid data access and manipulation.</p></li>
+<li><p><strong>Search Engines:</strong> Hash tables power the indexing mechanisms of search engines, facilitating speedy retrieval of relevant information from vast repositories of data. By efficiently mapping search queries to relevant web pages, hash tables optimize the search experience for users worldwide.</p></li>
+<li><p><strong>Caching Mechanisms:</strong> Web browsers and applications utilize hash tables to implement caching mechanisms, storing recently accessed data for quick retrieval. This enhances user experience by reducing load times and improving overall performance.</p></li>
+<li><p><strong>Cryptographic Systems:</strong> Hash tables with cryptographic hash functions are employed in password storage and authentication systems. By securely storing passwords as hashed values, hash tables protect sensitive information from unauthorized access and ensure data integrity.</p></li>
+</ol>
+<p>In essence, hash tables are indispensable tools in the realm of computing, driving innovation and efficiency across a wide range of industries and applications.</p>
+<p><strong>Code of Hash Table in python:</strong></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HashTable</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">_hash_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">key</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">hash_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">hash_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">]):</span>
+            <span class="k">if</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+                <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">hash_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash_function</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">hash_table</span><span class="p">[</span><span class="n">hash_key</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">element</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">element</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><a id="leetcode-problems"></a></p>
+</section>
+</section>
+<section id="leetcode-problems-related-to-this-topic">
+<h1><font color='3C6E71'>4. Leetcode Problems related to this topic<font><a class='anchor' id='top'></a><a class="headerlink" href="#leetcode-problems-related-to-this-topic" title="Link to this heading">#</a></h1>
+<div style="padding-right:60px">
+<p><a id="problem-1"></a></p>
+<section id="problem-1-remove-duplicates-from-sorted-list">
+<h2>Problem 1: <a class="reference external" href="https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/">Remove Duplicates from Sorted List</a><a class="headerlink" href="#problem-1-remove-duplicates-from-sorted-list" title="Link to this heading">#</a></h2>
+<img src="https://assets.leetcode.com/uploads/2021/01/04/list2.jpg" alt="Containiner with value" width="300" style="float:right; margin: 0px 0 0px 40px"/>
+<p>The code description is asking you to implement a function that takes the head of a sorted linked list as input and removes all duplicate nodes, ensuring that each element appears only once in the resulting list. The output should be the modified linked list, which remains sorted.</p>
+<ul class="simple">
+<li><p><strong>Input</strong>: head = [1,1,2,3,3]</p></li>
+<li><p><strong>Output</strong>: [1,2,3]</p></li>
+</ul>
+<p>To solve this problem, we can traverse the linked list while keeping track of consecutive duplicate elements. If we encounter duplicate elements, we can skip them by adjusting the next pointers of the nodes appropriately. By doing so, we ensure that only unique elements remain in the linked list.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="n">head</span><span class="p">):</span>
+    <span class="n">current</span> <span class="o">=</span> <span class="n">head</span>  
+
+    <span class="k">while</span> <span class="n">current</span> <span class="ow">and</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>  
+        <span class="k">if</span> <span class="n">current</span><span class="o">.</span><span class="n">val</span> <span class="o">==</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">val</span><span class="p">:</span> 
+            <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>  
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>  
+
+    <span class="k">return</span> <span class="n">head</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="padding-right:60px">
+<p><a id="problem-2"></a></p>
+</section>
+<section id="problem-2-two-sum">
+<h2>Problem 2: <a class="reference external" href="https://leetcode.com/problems/two-sum/description/">Two Sum</a><a class="headerlink" href="#problem-2-two-sum" title="Link to this heading">#</a></h2>
+<p>Given an array of integers <em>nums</em> and an integer <em>target</em>, return the indices of the two numbers such that they add up to <em>target</em>. We may assume that each input would have exactly one solution, and you may not use the same element twice. We should return the answer in any order.</p>
+<ul class="simple">
+<li><p><strong>Input</strong>: nums = [2,7,11,15], target = 9</p></li>
+<li><p><strong>Output</strong>: [0,1]</p></li>
+<li><p><strong>Explanation</strong>: Because nums[0] + nums[1] == 9, we return [0, 1].</p></li>
+</ul>
+<p>To solve this problem efficiently, we can utilize a dictionary to store the complements of elements encountered so far. As we traverse the array, for each element <em>n</em>, we calculate its complement <em>(target - n)</em> and check if it exists in the dictionary. If it does, it means we have found a pair of elements that add up to <em>target</em>. We return the indices of the current element and its complement stored in the dictionary. If the complement does not exist in the dictionary, we add the current element and its index to the dictionary for future reference.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">twoSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+        <span class="nb">dict</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">dict</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">i</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">dict</span><span class="p">[</span><span class="n">target</span><span class="o">-</span><span class="n">n</span><span class="p">]</span><span class="o">=</span><span class="n">i</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="padding-right:60px">
+<p><a id="problem-3"></a></p>
+</section>
+<section id="problem-3-palindrome-linked-list">
+<h2>Problem 3: <a class="reference external" href="https://leetcode.com/problems/palindrome-linked-list/description/">Palindrome Linked List</a><a class="headerlink" href="#problem-3-palindrome-linked-list" title="Link to this heading">#</a></h2>
+<img src="https://assets.leetcode.com/uploads/2021/03/03/pal1linked-list.jpg" alt="Containiner with value" width="300" style="float:right; margin: 0px 0 0px 40px"/>
+Given the head of a singly linked list, determine if it is a palindrome or not. A palindrome is a sequence that reads the same forwards and backward.
+<ul class="simple">
+<li><p><strong>Input</strong>: head = [1,2,2,1]</p></li>
+<li><p><strong>Output</strong>: true</p></li>
+</ul>
+<p>Use the slow and fast pointer technique to find the middle of the linked list. Reverse the second half of the linked list. Compare the first half with the reversed second half. If they match, the linked list is a palindrome. Otherwise, it is not a palindrome.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">head</span><span class="p">):</span>
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span> 
+        <span class="k">while</span> <span class="n">fast</span> <span class="ow">and</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="p">:</span>
+           <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span><span class="o">.</span><span class="n">next</span>
+           <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span> 
+            
+        <span class="n">stack1</span><span class="o">=</span><span class="p">[]</span>
+        <span class="n">stack2</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="n">fast</span> <span class="o">=</span> <span class="n">slow</span> 
+        <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span>
+        <span class="k">while</span> <span class="n">fast</span><span class="p">:</span>
+            <span class="n">stack2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">slow</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">stack1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fast</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+            <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="n">next</span> 
+            
+        <span class="n">stack2</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">stack1</span> <span class="o">==</span> <span class="n">stack2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p><a id="conclusion"></a></p>
+</section>
+</section>
+<section id="conclusion">
+<h1><font color='3C6E71'>5. Conclusion<font><a class='anchor' id='top'></a><a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
+<p>Chapter 4 has been a comprehensive exploration of data and data structures, laying the groundwork for understanding their importance and practical applications in computer science and software engineering. We began our journey by dissecting the concept of data.Moving forward, we embarked on an enlightening exploration of data structures, which are specialized formats designed to organize, process, and store data efficiently. These structures act as containers, providing a systematic approach to managing data and enhancing the performance of algorithms and operations.</p>
+<p>Throughout this chapter, we discovered various types of data structures, each with its unique characteristics and applications. From linear data structures like linked lists, stacks, and queues. We explored a diverse range of tools for organizing and manipulating data. In particular, we delved into the intricacies of linear data structures, understanding their significance and practical implementations. Through detailed discussions and illustrative examples, we gained insights into linked lists, stacks, and queues. Moreover, we explored the remarkable world of hash tables, witnessing their transformative impact on data storage and retrieval. By harnessing the power of hash functions, these structures offer rapid access to information, making them indispensable in database management, search engines, caching mechanisms, and cryptographic systems. To reinforce our understanding, we engaged in practical problem-solving exercises, tackling LeetCode problems related to data structures. By applying our knowledge to real-world coding challenges, we honed our problem-solving skills and deepened our comprehension of data structure concepts.</p>
+<p>As we conclude Chapter 4, we emerge with a newfound appreciation for the intricacies and versatility of data structures. Armed with this knowledge, we are better equipped to navigate the complexities of software development, optimize algorithm performance, and craft elegant solutions to computational problems. In the next chapter, we will build upon this foundation, exploring advanced topics and delving deeper into the nuances of data structures and algorithms.</p>
+<hr class="docutils" />
+<p><a id="next-concepts"></a></p>
+</section>
+<section id="topics-materials-to-read-next">
+<h1><font color='3C6E71'>6. Topics/Materials to read next<font><a class='anchor' id='top'></a><a class="headerlink" href="#topics-materials-to-read-next" title="Link to this heading">#</a></h1>
+<p>Best resources for learning theory:</p>
+<ul class="simple">
+<li><p>MIT Algorithms on YouTube</p></li>
+<li><p>Jenny’s Lectures on YouTube</p></li>
+<li><p>Abdul Bari Algorithms on YouTube</p></li>
+</ul>
+<p>Problems:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://leetcode.com/list/50sfo32d">Linked List</a></p></li>
+<li><p><a class="reference external" href="https://leetcode.com/list/504xdrcr">Stack and Queue</a></p></li>
+<li><p><a class="reference external" href="https://leetcode.com/list/504wrexe">Hash Table </a></p></li>
+</ul>
+<p>Books:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844">Introduction to Algorithms</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Data-Structures-Algorithms-Made-Easy/dp/819324527X">Data Structures and Algorithms Made Easy</a></p></li>
+<li><p><a class="reference external" href="https://www.amazon.com/Algorithms-4th-Robert-Sedgewick/dp/032157351X">Algorithms</a></p></li>
+</ul>
+<hr class="docutils" />
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter3.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Table of contents</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter5.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Chapter: Arrays and Pointers</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter 4</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-linear-data-structures-hash-tables">Data Structures: Linear Data Structures, Hash Tables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents"><font color="3E5C76">Table of contents<font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation-intuition"><font color="3C6E71">1. Motivation/Intuition<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data">What is Data?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-data-structures">What is Data structures?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-do-we-need-them">Why Do We Need Them?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-data-structures">Types of Data Structures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-data-structures"><font color="3C6E71">2. Linear Data Structures<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-linear-data-structure-and-types-in-linear-data-structure">What Is Linear Data Structure? and Types in Linear Data Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Linear data structures:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linked-list"><font color="16425B">1. Linked List <font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stack"><font color="16425B">2. Stack <font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#queue"><font color="16425B">3. Queue <font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hash-tables"><font color="3C6E71">3. Hash Tables<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-hash-tables">What Is Hash Tables?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-this-topic"><font color="3C6E71">4. Leetcode Problems related to this topic<font><a class="anchor" id="top"></a></font></font></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-remove-duplicates-from-sorted-list">Problem 1: Remove Duplicates from Sorted List</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-two-sum">Problem 2: Two Sum</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-palindrome-linked-list">Problem 3: Palindrome Linked List</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion"><font color="3C6E71">5. Conclusion<font><a class="anchor" id="top"></a></font></font></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-materials-to-read-next"><font color="3C6E71">6. Topics/Materials to read next<font><a class="anchor" id="top"></a></font></font></a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
