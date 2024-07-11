@@ -1,0 +1,1218 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Chapter: Arrays and Pointers &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter5';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data Structures: Trees and Graphs" href="Chapter6.html" />
+    <link rel="prev" title="Chapter 4" href="Chapter4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter10.html">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter5.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter5.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Chapter: Arrays and Pointers</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter: Arrays and Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-arrays-and-pointers">Introduction to Arrays and Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-array-basics">Concept 1: Array Basics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-multi-dimensional-arrays">Concept 2: Multi-dimensional Arrays</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3">Problem 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-3-understanding-pointers">Concept 3: Understanding Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-4-dynamic-memory-allocation">Concept 4: Dynamic Memory Allocation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-and-next-step">Conclusion and Next Step</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="chapter-arrays-and-pointers">
+<h1>Chapter: Arrays and Pointers<a class="headerlink" href="#chapter-arrays-and-pointers" title="Link to this heading">#</a></h1>
+<p>Id: 23110701</p>
+<p>Suraiyo Raziyeva</p>
+<hr class="docutils" />
+<p>#TABLE OF CONTENT:</p>
+<p>Introduction to Arrays and Pointers</p>
+<ul class="simple">
+<li><p>Motivation and Intuition</p></li>
+<li><p>Overview of Array Data Structure</p></li>
+</ul>
+<p>Concept 1: Array Basics</p>
+<ul class="simple">
+<li><p>Intuition</p></li>
+<li><p>Example: Declaring and Accessing Array Elements</p></li>
+<li><p>Code: Demonstrating Array Operations</p></li>
+</ul>
+<p>Concept 2: Multi-dimensional Arrays</p>
+<ul class="simple">
+<li><p>Intuition</p></li>
+<li><p>Example: Creating and Manipulating 2D Arrays</p></li>
+<li><p>Code: Implementing Matrix Operations</p></li>
+<li><p>Leetcode Problems Related to Arrays</p></li>
+</ul>
+<p>Concept 3: Understanding Pointers</p>
+<ul class="simple">
+<li><p>Intuition</p></li>
+<li><p>Example: Pointer Arithmetic and Dereferencing</p></li>
+<li><p>Code: Working with Pointers in C/C++</p></li>
+</ul>
+<p>Concept 4: Dynamic Memory Allocation</p>
+<ul class="simple">
+<li><p>Intuition</p></li>
+<li><p>Example: Allocating and Freeing Memory Dynamically</p></li>
+<li><p>Code: Implementing Linked Lists Using Pointers</p></li>
+<li><p>Leetcode Problems Related to Pointers</p></li>
+</ul>
+<p>Conclusion and Next Steps</p>
+<ul class="simple">
+<li><p>Summary of Key Concepts Covered</p></li>
+<li><p>Recommendations for Further Reading and Practice</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction-to-arrays-and-pointers">
+<h1>Introduction to Arrays and Pointers<a class="headerlink" href="#introduction-to-arrays-and-pointers" title="Link to this heading">#</a></h1>
+<p><strong>Motivation and Intuition</strong></p>
+<p>Arrays and pointers are fundamental concepts in computer programming that play a crucial role in data manipulation and memory management. Understanding these concepts not only enhances your ability to write efficient and optimized code but also lays the groundwork for mastering more advanced data structures and algorithms.</p>
+<p>The motivation behind learning about arrays and pointers lies in their ubiquitous presence in programming tasks. Arrays provide a structured way to store and access multiple elements of the same data type, offering efficient operations for tasks like sorting, searching, and iteration. Pointers, on the other hand, introduce a level of indirection by allowing us to work directly with memory addresses, enabling dynamic memory allocation, linked data structures, and efficient function parameter passing.</p>
+<p>Intuitively, arrays can be visualized as contiguous blocks of memory, where each element is accessed using an index. This direct access property makes arrays efficient for random access operations. Pointers, on the contrary, are variables that store memory addresses, pointing to the location of another variable or data structure. They facilitate dynamic memory allocation and enable more flexible and complex data structures that can adapt at runtime.</p>
+<hr class="docutils" />
+<p><strong>Overview of Array Data Structure</strong></p>
+<p>An array is a collection of elements of the same data type stored in contiguous memory locations. The elements are accessed using indices, with the first element typically at index 0. Arrays provide efficient access to elements based on their positions and are used extensively in various programming tasks such as implementing lists, queues, and matrices.</p>
+<hr class="docutils" />
+<p><strong>Understanding Pointers and Memory Addresses</strong></p>
+<p>Pointers are variables that hold memory addresses, allowing indirect access to data. They are used for dynamic memory allocation, passing data by reference, and implementing complex data structures like linked lists and trees. Understanding memory addresses and pointer operations is essential for low-level memory management and optimizing code performance.</p>
+<p>In the subsequent sections, we will delve deeper into the concepts of arrays and pointers, explore practical examples, and solve problems to solidify our understanding of these fundamental programming constructs. Let’s proceed with exploring arrays and pointers in more detail.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="concept-1-array-basics">
+<h1>Concept 1: Array Basics<a class="headerlink" href="#concept-1-array-basics" title="Link to this heading">#</a></h1>
+<p><strong>Intuition</strong>
+Arrays are fundamental data structures that allow us to store and access multiple elements of the same data type sequentially in memory. The key intuition behind arrays is their ability to provide direct and efficient access to elements based on their indices. This direct access property enables us to perform operations like insertion, deletion, and retrieval of elements with constant-time complexity.</p>
+<hr class="docutils" />
+<p><img alt="objects-tenElementArray.gif" src="data:image/gif;base64,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" /></p>
+<p><strong>Example: Declaring and Accessing Array Elements</strong></p>
+<p>Let’s consider an example of declaring and accessing elements in a one-dimensional array using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare an array of integers</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Accessing elements of the array using indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at index 0:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Output: 10</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at index 2:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Output: 30</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at index 4:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>  <span class="c1"># Output: 50</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Element at index 0: 10
+Element at index 2: 30
+Element at index 4: 50
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we declare an array arr containing integer values and demonstrate how to access elements using their respective indices.</p>
+<hr class="docutils" />
+<p><strong>Code: Demonstrating Array Operations</strong></p>
+<p>Let’s showcase some common array operations such as insertion, deletion, and traversal using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Insert an element at the end of the array</span>
+<span class="n">arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array after insertion:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>  <span class="c1"># Output: [10, 20, 30, 40, 50, 60]</span>
+
+<span class="c1"># Remove an element from the array</span>
+<span class="n">arr</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array after deletion:&quot;</span><span class="p">,</span> <span class="n">arr</span><span class="p">)</span>  <span class="c1"># Output: [10, 20, 40, 50, 60]</span>
+
+<span class="c1"># Traverse the array using a loop</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Array elements:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Array after insertion: [10, 20, 30, 40, 50, 60]
+Array after deletion: [10, 20, 40, 50, 60]
+Array elements:
+10
+20
+40
+50
+60
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this code snippet, we demonstrate how to insert an element at the end of the array, remove a specific element, and traverse the array using a loop to access and print each element.</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="concept-2-multi-dimensional-arrays">
+<h1>Concept 2: Multi-dimensional Arrays<a class="headerlink" href="#concept-2-multi-dimensional-arrays" title="Link to this heading">#</a></h1>
+<p><strong>Intuition</strong></p>
+<p>Multi-dimensional arrays extend the concept of arrays to store data in multiple dimensions, such as rows and columns. A two-dimensional array, often referred to as a matrix, consists of rows and columns, allowing us to represent and manipulate tabular data efficiently.</p>
+<p><img alt="Unknown.png" src="data:image/png;base64,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" /></p>
+<p>Example: Creating and Manipulating 2D Arrays</p>
+<p>Let’s create and manipulate a 2D array (matrix) using Python:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a 2x3 matrix (2 rows, 3 columns)</span>
+<span class="n">matrix</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+
+<span class="c1"># Accessing elements of the matrix using row and column indices</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at row 0, column 1:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Output: 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Element at row 1, column 2:&quot;</span><span class="p">,</span> <span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Output: 6</span>
+
+<span class="c1"># Traverse the matrix and print all elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix elements:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># Move to the next line after printing each row</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Element at row 0, column 1: 2
+Element at row 1, column 2: 6
+Matrix elements:
+1 2 3 
+4 5 6 
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this example, we create a 2x3 matrix (matrix) and demonstrate how to access elements using row and column indices. We also traverse the matrix using nested loops to print all its elements row by row.</p>
+<p>These examples illustrate the basic concepts and operations associated with arrays, including one-dimensional arrays and multi-dimensional arrays (matrices). Understanding these fundamentals is essential for building more complex algorithms and data structures based on arrays.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="problem-1">
+<h1>Problem 1<a class="headerlink" href="#problem-1" title="Link to this heading">#</a></h1>
+<p>Given two sorted arrays nums1 andnums2 of size m and n respectively, return the median of the two sorted arrays.</p>
+<p>The overall run time complexity should be <code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">(m+n))</span></code>.</p>
+<p>Example 1:</p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums1</span> <span class="pre">=</span> <span class="pre">[1,3],</span> <span class="pre">nums2</span> <span class="pre">=</span> <span class="pre">[2]</span></code></p>
+<p>Output: <code class="docutils literal notranslate"><span class="pre">2.00000</span></code></p>
+<p>Explanation: <code class="docutils literal notranslate"><span class="pre">merged</span> <span class="pre">array</span> <span class="pre">=</span> <span class="pre">[1,2,3]</span> <span class="pre">and</span> <span class="pre">median</span> <span class="pre">is</span> <span class="pre">2.</span></code></p>
+<p>Example 2:</p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums1</span> <span class="pre">=</span> <span class="pre">[1,2],</span> <span class="pre">nums2</span> <span class="pre">=</span> <span class="pre">[3,4]</span></code></p>
+<p>Output: <code class="docutils literal notranslate"><span class="pre">2.50000</span></code></p>
+<p>Explanation: <code class="docutils literal notranslate"><span class="pre">merged</span> <span class="pre">array</span> <span class="pre">=</span> <span class="pre">[1,2,3,4]</span> <span class="pre">and</span> <span class="pre">median</span> <span class="pre">is</span> <span class="pre">(2</span> <span class="pre">+</span> <span class="pre">3)</span> <span class="pre">/</span> <span class="pre">2</span> <span class="pre">=</span> <span class="pre">2.5.</span></code></p>
+<p><strong>Solution:</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">findMedianSortedArrays</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type nums1: List[int]</span>
+<span class="sd">        :type nums2: List[int]</span>
+<span class="sd">        :rtype: float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ensure nums1 is the smaller array (or of equal size)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">):</span>
+            <span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">,</span> <span class="n">nums1</span>
+
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums2</span><span class="p">)</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span>
+
+        <span class="c1"># Define the boundaries for binary search</span>
+        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m</span>
+
+        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+            <span class="c1"># Partition nums1 and nums2</span>
+            <span class="n">partition_nums1</span> <span class="o">=</span> <span class="p">(</span><span class="n">left</span> <span class="o">+</span> <span class="n">right</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">partition_nums2</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_length</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">partition_nums1</span>
+
+            <span class="c1"># Calculate left and right elements</span>
+            <span class="n">max_left_nums1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">partition_nums1</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">nums1</span><span class="p">[</span><span class="n">partition_nums1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">min_right_nums1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">partition_nums1</span> <span class="o">==</span> <span class="n">m</span> <span class="k">else</span> <span class="n">nums1</span><span class="p">[</span><span class="n">partition_nums1</span><span class="p">]</span>
+
+            <span class="n">max_left_nums2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">partition_nums2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">nums2</span><span class="p">[</span><span class="n">partition_nums2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">min_right_nums2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">partition_nums2</span> <span class="o">==</span> <span class="n">n</span> <span class="k">else</span> <span class="n">nums2</span><span class="p">[</span><span class="n">partition_nums2</span><span class="p">]</span>
+
+            <span class="c1"># Check if the partitions are valid</span>
+            <span class="k">if</span> <span class="n">max_left_nums1</span> <span class="o">&lt;=</span> <span class="n">min_right_nums2</span> <span class="ow">and</span> <span class="n">max_left_nums2</span> <span class="o">&lt;=</span> <span class="n">min_right_nums1</span><span class="p">:</span>
+                <span class="c1"># Determine median based on total length (odd/even)</span>
+                <span class="k">if</span> <span class="n">total_length</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">max_left_nums1</span><span class="p">,</span> <span class="n">max_left_nums2</span><span class="p">)</span> <span class="o">+</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_right_nums1</span><span class="p">,</span> <span class="n">min_right_nums2</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">max_left_nums1</span><span class="p">,</span> <span class="n">max_left_nums2</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">max_left_nums1</span> <span class="o">&gt;</span> <span class="n">min_right_nums2</span><span class="p">:</span>
+                <span class="c1"># Move partition_nums1 to the left</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">partition_nums1</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Move partition_nums1 to the right</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">partition_nums1</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1"># If no median is found (shouldn&#39;t reach this point)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No median found&quot;</span><span class="p">)</span>
+
+<span class="c1"># Example usage:</span>
+<span class="n">nums1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">findMedianSortedArrays</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">nums2</span><span class="p">))</span>  <span class="c1"># Output: 2.0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><em><strong>Explanation of Solution:</strong></em></p>
+<p>Explanation of the approach:</p>
+<p>Binary Search and Partitioning: Use binary search to find the correct partitioning of nums1 that balances the number of elements on the left and right sides when combined with the partitioning of <code class="docutils literal notranslate"><span class="pre">nums2</span></code>. This helps in locating the median efficiently.</p>
+<p>Partitioning Logic:</p>
+<p>Partition nums1 at partition_nums1 and <code class="docutils literal notranslate"><span class="pre">nums2</span></code> at partition_nums2 such that the elements to the left of the partitions (max_left_nums1 and max_left_nums2) are less than or equal to the elements on the right (min_right_nums1 and min_right_nums2).
+Handling Edge Cases:</p>
+<p>Adjust the partitions (left or right) based on comparisons of the maximum and minimum values of the partitions to ensure the partitions are balanced and valid.
+Calculating Median:</p>
+<p>Once the correct partitioning is found, determine the median based on whether the combined length of nums1 and nums2 is odd or even.
+This solution efficiently finds the median of two sorted arrays in O(log(min(m, n))) time complexity, where m and n are the lengths of nums1 and nums2, respectively.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="problem-2">
+<h1>Problem 2<a class="headerlink" href="#problem-2" title="Link to this heading">#</a></h1>
+<p>Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.</p>
+<p>You must write an algorithm with <code class="docutils literal notranslate"><span class="pre">O(log</span> <span class="pre">n)</span> </code>runtime complexity.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums</span> <span class="pre">=</span> <span class="pre">[1,3,5,6],</span> <span class="pre">target</span> <span class="pre">=</span> <span class="pre">5</span></code></p>
+<p>Output: 2</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums</span> <span class="pre">=</span> <span class="pre">[1,3,5,6],</span> <span class="pre">target</span> <span class="pre">=</span> <span class="pre">2</span></code></p>
+<p>Output: 1</p>
+<p><strong>Example 3:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums</span> <span class="pre">=</span> <span class="pre">[1,3,5,6],</span> <span class="pre">target</span> <span class="pre">=</span> <span class="pre">7</span></code></p>
+<p>Output: 4</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">searchInsert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">,</span> <span class="n">target</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type nums: List[int]</span>
+<span class="sd">        :type target: int</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">left</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">while</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">mid</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">left</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+
+            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">mid</span>
+            <span class="k">elif</span> <span class="n">nums</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="n">left</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">right</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># If target is not found, &#39;right + 1&#39; will be the correct index to insert</span>
+        <span class="k">return</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="c1"># Test cases</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+
+<span class="c1"># Example 1</span>
+<span class="n">nums1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">target1</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">searchInsert</span><span class="p">(</span><span class="n">nums1</span><span class="p">,</span> <span class="n">target1</span><span class="p">))</span>  <span class="c1"># Output: 2</span>
+
+<span class="c1"># Example 2</span>
+<span class="n">nums2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">target2</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">searchInsert</span><span class="p">(</span><span class="n">nums2</span><span class="p">,</span> <span class="n">target2</span><span class="p">))</span>  <span class="c1"># Output: 1</span>
+
+<span class="c1"># Example 3</span>
+<span class="n">nums3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">target3</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sol</span><span class="o">.</span><span class="n">searchInsert</span><span class="p">(</span><span class="n">nums3</span><span class="p">,</span> <span class="n">target3</span><span class="p">))</span>  <span class="c1"># Output: 4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+1
+4
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explanation of the approach:</strong></p>
+<p>Binary Search:</p>
+<p>Initialize left to 0 and right to <code class="docutils literal notranslate"><span class="pre">len(nums)</span> <span class="pre">-</span> <span class="pre">1.</span></code></p>
+<p>Use a while loop to perform binary search:</p>
+<p>Calculate mid as the middle index of the current range (left to right).
+Compare <code class="docutils literal notranslate"><span class="pre">nums[mid]</span></code> with target:</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">nums[mid]</span></code> equals target, return mid.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">nums[mid]</span></code> is less than target, adjust left to mid + 1 to search the right half.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">nums[mid]</span></code> is greater than target, adjust right to mid - 1 to search the left half.</p>
+<p>Repeat the loop until left exceeds right.</p>
+<p>Insertion Point:</p>
+<p>If the while loop exits without finding the target, it means the target should be inserted at right + 1 (or left, since left would have exceeded right).
+This binary search approach ensures O(log n) runtime complexity since the search space is halved in each iteration. The algorithm efficiently finds the index where the target should be inserted into the sorted array or returns the index if the target is found.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="problem-3">
+<h1>Problem 3<a class="headerlink" href="#problem-3" title="Link to this heading">#</a></h1>
+<p>You are given two integer arrays <code class="docutils literal notranslate"><span class="pre">nums1</span></code> and <code class="docutils literal notranslate"><span class="pre">nums2</span></code>, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and <code class="docutils literal notranslate"><span class="pre">nums2</span></code> respectively.</p>
+<p>Merge nums1 and <code class="docutils literal notranslate"><span class="pre">nums2</span></code> into a single array sorted in non-decreasing order.</p>
+<p>The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. <code class="docutils literal notranslate"><span class="pre">nums2</span></code> has a length of n.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums1</span> <span class="pre">=</span> <span class="pre">[1,2,3,0,0,0]</span></code>, m = 3, <code class="docutils literal notranslate"><span class="pre">nums2</span> <span class="pre">=</span> <span class="pre">[2,5,6]</span></code>, n = 3</p>
+<p>Output: <code class="docutils literal notranslate"><span class="pre">[1,2,2,3,5,6]</span></code></p>
+<p>Explanation: The arrays we are merging are <code class="docutils literal notranslate"><span class="pre">[1,2,3]</span></code> and <code class="docutils literal notranslate"><span class="pre">[2,5,6]</span></code>.</p>
+<p>The result of the merge is <code class="docutils literal notranslate"><span class="pre">[1,2,2,3,5,6]</span></code> with the underlined elements coming from nums1.</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums1</span> <span class="pre">=</span> <span class="pre">[1]</span></code>, <code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">=</span> <span class="pre">1</span></code>,<code class="docutils literal notranslate"> <span class="pre">nums2</span> <span class="pre">=</span> <span class="pre">[],</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">0</span></code></p>
+<p>Output: [1]</p>
+<p>Explanation: The arrays we are merging are [1] and [].</p>
+<p>The result of the merge is [1].</p>
+<p><strong>Example 3:</strong></p>
+<p>Input: <code class="docutils literal notranslate"><span class="pre">nums1</span> <span class="pre">=</span> <span class="pre">[0],</span> <span class="pre">m</span> <span class="pre">=</span> <span class="pre">0,</span> <span class="pre">nums2</span> <span class="pre">=</span> <span class="pre">[1],</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">1</span></code></p>
+<p>Output: [1]</p>
+<p>Explanation: The arrays we are merging are [] and [1].</p>
+<p>The result of the merge is [1].</p>
+<p>Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums1</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">nums2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :type nums1: List[int]</span>
+<span class="sd">        :type m: int</span>
+<span class="sd">        :type nums2: List[int]</span>
+<span class="sd">        :type n: int</span>
+<span class="sd">        :rtype: None Do not return anything, modify nums1 in-place instead.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Initialize pointers for nums1 and nums2 (starting from the end)</span>
+        <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># Initialize pointer for the end of the merged array</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Merge nums1 and nums2 from the end to the beginning</span>
+        <span class="k">while</span> <span class="n">p1</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">p2</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nums1</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">nums2</span><span class="p">[</span><span class="n">p2</span><span class="p">]:</span>
+                <span class="n">nums1</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums1</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span>
+                <span class="n">p1</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">nums1</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span>
+                <span class="n">p2</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">p</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="c1"># If there are remaining elements in nums2, copy them to nums1</span>
+        <span class="k">while</span> <span class="n">p2</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nums1</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums2</span><span class="p">[</span><span class="n">p2</span><span class="p">]</span>
+            <span class="n">p2</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">p</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="c1"># Test cases</span>
+<span class="n">sol</span> <span class="o">=</span> <span class="n">Solution</span><span class="p">()</span>
+
+<span class="c1"># Example 1</span>
+<span class="n">nums1_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">m_1</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">nums2_1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">n_1</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nums1_1</span><span class="p">,</span> <span class="n">m_1</span><span class="p">,</span> <span class="n">nums2_1</span><span class="p">,</span> <span class="n">n_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums1_1</span><span class="p">)</span>  <span class="c1"># Output: [1, 2, 2, 3, 5, 6]</span>
+
+<span class="c1"># Example 2</span>
+<span class="n">nums1_2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">m_2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">nums2_2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">n_2</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nums1_2</span><span class="p">,</span> <span class="n">m_2</span><span class="p">,</span> <span class="n">nums2_2</span><span class="p">,</span> <span class="n">n_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums1_2</span><span class="p">)</span>  <span class="c1"># Output: [1]</span>
+
+<span class="c1"># Example 3</span>
+<span class="n">nums1_3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">m_3</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">nums2_3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">n_3</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sol</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">nums1_3</span><span class="p">,</span> <span class="n">m_3</span><span class="p">,</span> <span class="n">nums2_3</span><span class="p">,</span> <span class="n">n_3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">nums1_3</span><span class="p">)</span>  <span class="c1"># Output: [1]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 2, 3, 5, 6]
+[1]
+[1]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explanation of the approach:</strong></p>
+<p>Initialization:</p>
+<p>Use three pointers: p1 pointing to the end of valid elements in <code class="docutils literal notranslate"><span class="pre">nums1</span></code>, <code class="docutils literal notranslate"><span class="pre">p2</span> </code>pointing to the end of <code class="docutils literal notranslate"><span class="pre">nums2</span></code>, and p pointing to the end of the merged array (nums1).</p>
+<p>Merging:</p>
+<p>Compare elements at nums1[p1] and nums2[p2] from the end and place the larger element at nums1[p].</p>
+<p>Decrement p1 or p2 and move p backwards accordingly.</p>
+<p>Repeat the above process until either nums1 or nums2 is fully merged into nums1.</p>
+<p>Handling Remaining Elements:</p>
+<p>If there are remaining elements in nums2 after merging all elements of nums1, copy them to the beginning of nums1.</p>
+<p>This approach efficiently merges the two sorted arrays nums1 and nums2 into nums1 in-place with a time complexity of O(m + n), where m is the number of elements in nums1 and n is the number of elements in nums2. The merged result is stored directly in nums1.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="concept-3-understanding-pointers">
+<h1>Concept 3: Understanding Pointers<a class="headerlink" href="#concept-3-understanding-pointers" title="Link to this heading">#</a></h1>
+<p><img alt="Unknown-1.png" src="data:image/png;base64,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" /></p>
+<p><strong>Intuition</strong></p>
+<p>Pointers are a fundamental concept in programming, particularly in languages like C and C++. A pointer is a variable that stores the memory address of another variable. This allows for direct memory access and manipulation, which can lead to more efficient code execution. Understanding pointers is crucial for tasks such as dynamic memory allocation, passing large structures to functions without copying, and implementing data structures like linked lists and trees.</p>
+<p><strong>Example: Pointer Arithmetic and Dereferencing</strong></p>
+<p>Pointer arithmetic and dereferencing are two key operations you can perform on pointers. Pointer arithmetic involves manipulating the memory address stored in a pointer, while dereferencing involves accessing the value stored at the memory address the pointer is pointing to.</p>
+<p>Pointer Arithmetic: Since pointers store memory addresses, you can add or subtract integers from them to move to different memory locations. This is particularly useful when dealing with arrays.</p>
+<p>Dereferencing: Dereferencing a pointer means accessing the value at the memory address the pointer holds. You use the dereference operator * to perform this operation.</p>
+<p><strong>Code: Working with Pointers</strong></p>
+<p>Here’s a simple C program to illustrate pointer arithmetic and dereferencing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Understanding &quot;Pointers&quot; in Python</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Pointer to the first element of the array, using an index</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Simulating Pointer Arithmetic and Dereferencing in Python</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Pointer arithmetic</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial index (ptr): </span><span class="si">{</span><span class="n">ptr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at initial index (numbers[ptr]): </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Move the &quot;pointer&quot; to the next element in the array</span>
+    <span class="n">ptr</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index after ptr += 1: </span><span class="si">{</span><span class="n">ptr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at new index (numbers[ptr]): </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Move the &quot;pointer&quot; two elements forward</span>
+    <span class="n">ptr</span> <span class="o">+=</span> <span class="mi">2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index after ptr += 2: </span><span class="si">{</span><span class="n">ptr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at new index (numbers[ptr]): </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Dereferencing</span>
+    <span class="n">numbers</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># Changing the value at the current index</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value at index after numbers[ptr] = 100: </span><span class="si">{</span><span class="n">numbers</span><span class="p">[</span><span class="n">ptr</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updated array: &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Simulating Pointer Arithmetic and Dereferencing in Python
+
+Initial index (ptr): 0
+Value at initial index (numbers[ptr]): 10
+Index after ptr += 1: 1
+Value at new index (numbers[ptr]): 20
+Index after ptr += 2: 3
+Value at new index (numbers[ptr]): 40
+Value at index after numbers[ptr] = 100: 100
+Updated array: 10 20 30 100 50 
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explanation</strong></p>
+<p>Pointer Initialization:</p>
+<p>This initializes <code class="docutils literal notranslate"><span class="pre">ptr</span></code> to point to the first element of the numbers array.</p>
+<p>Then increments <code class="docutils literal notranslate"><span class="pre">ptr</span></code> to point to the next element of the array. Since ptr is an int*, adding 1 to <code class="docutils literal notranslate"><span class="pre">ptr</span> </code>increases its address by sizeof(int) bytes.</p>
+<p>Dereferencing <code class="docutils literal notranslate"><span class="pre">ptr</span></code> with <code class="docutils literal notranslate"><span class="pre">*ptr</span></code> allows us to read and modify the value stored at the memory address ptr points to.</p>
+<p>Output:</p>
+<p>The program demonstrates how pointer arithmetic moves the pointer through the array and how dereferencing allows us to change the value at a specific address. The final array reflects the change made through the pointer.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="concept-4-dynamic-memory-allocation">
+<h1>Concept 4: Dynamic Memory Allocation<a class="headerlink" href="#concept-4-dynamic-memory-allocation" title="Link to this heading">#</a></h1>
+<p><img alt="per-chunk-size-allocator-2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAicAAAFpCAYAAABH6ohcAAAIH3RFWHRteGZpbGUAJTNDbXhmaWxlJTIwaG9zdCUzRCUyMmFwcC5kaWFncmFtcy5uZXQlMjIlMjBtb2RpZmllZCUzRCUyMjIwMjAtMDctMjNUMTklM0EzMiUzQTQwLjU3N1olMjIlMjBhZ2VudCUzRCUyMjUuMCUyMChYMTElM0IlMjBMaW51eCUyMHg4Nl82NCklMjBBcHBsZVdlYktpdCUyRjUzNy4zNiUyMChLSFRNTCUyQyUyMGxpa2UlMjBHZWNrbyklMjBDaHJvbWUlMkY4NC4wLjQxNDcuODklMjBTYWZhcmklMkY1MzcuMzYlMjIlMjBldGFnJTNEJTIyZWVtbFRvZWxXWWN3U0hwaUxnWHIlMjIlMjB2ZXJzaW9uJTNEJTIyMTMuNC45JTIyJTIwdHlwZSUzRCUyMmdvb2dsZSUyMiUzRSUzQ2RpYWdyYW0lMjBpZCUzRCUyMl9SYVo3c1pTcG9YM29VbjhydUNnJTIyJTIwbmFtZSUzRCUyMlBhZ2UtMSUyMiUzRTdWemZjJTJCTW1FUDVyJTJGSmlNTElRc1A3Yko5VzZ1MDVtYlpxYTllMVFsWW1sT05xNk1mJTJGV3ZMN1pBa3BmWXdqa3NpSEo1eUlnVllQajRkbG1XdFVmb1liNzdXTWJMN0ElMkJha21Ma2UlMkJsdWhCNUh2aCUyQkZFZjklMkZFT3dyUVJDTks4R3N6Tk5LMUJJODVmOFJJZlNFZEoyblpIVlNrVkZhc0h4NUtrem9Za0VTZGlLTHk1SnVUNnM5MCUyQkwwVTVmeGpDaUNweVF1Vk9uZmVjb3lNUzNzTmZKUEpKOWw4cFBIbm5nemoyVmxJVmhsY1VxM0xSSDZNRUlQSmFXc2VwcnZIa2h4d0U3aVVyWDc3Y3piZW1BbFdUQ2RCdVJ4OVR6NzY0N1EzN1BQbjd3dm0zRHo3NTkzb3BkTlhLekZoTVZnMlY0aVVOTDFJaVdIVHJ3UiUyQm5XYjVZdzhMZVBrOEhiTGw1ekxNall2ZUduTUg1JTJGem9uaWdCUzJQYmRFRXhUaE11SHpGU3ZxZHRONTR4eiUyRiUyQlJneUFsSXpzenM1c1hPUEZlVWJvbkxCeXo2dklCcUdBZUMlMkI1SThyYlpzV1FFR1d0eFpLeVdIQmtWdmZjd01nZkJKSlhvT29QQXRXcFk2Z2l3Nmdhd0toV2JsY3dDb2JBUEI4N2hpb2VCS3FSWTZpRzd1a3pHanVHMFdRSXpFT0JZNmhHUTBCVjhYcW1LcXBobjZoSzNYbmJzQ3BidW5WWVRmdm90OWhMcklNMENKZGJNWlRXWVhYUTV3NDgxMEFhaE5NZE9MZWRtUGE2RFlDRVhkc2NmQWMzQnpSeHpOMlRtTHh4QllWMnp6cXNwamNITzdBaTEyQWQ1blppSFZZSHQ1UEF0UkNyYnpvbVk0Vjd5aTV0SFZiVFlSd1RJTGtXWlBVSEdaV3BUOG90V0tlOXdqcDFqM3N3d0c4ZEpObXhTeURCWUlCOWtBWnhXUXo5UGZ1d0R1SjBBdmRjJTJCN0NxJTJGbDUwOTglMkJlRVM1THN2WGklMkI4cTZob090WXFJaTlsSXNZWG96eEZUbmJ4eTZEVm05MjFyRFRQWHMlMkZNQnR6T3JOMXhwbXFxTjNmMyUyRnZHa3oxOW1zTkpnM0hqU3pTWHc1SmJyeVVGUEZxbFNlbnNKQmR6cjYybnI4ZDBMekhvdlM0RSUyQkFlQzN0WldQRFJmMjBYV3EwT3hhYlpzU1RiVllNanFaSlBCeGFBVDRDdXk0UmNtcnF3M1N3dVo0UmRxSGhtUlZ0TGhsOVlNaWtyU1JHemZITTYzcGZXVVh6Q0Y1cnptWnk5Qkt1VEIyUVgxVHhGcTRZTlNrY0l1aVFoNktqQ1Flbm9TS3Q2MmolMkJRTktUaDJBMlZhYUVtMDZLZlREUEJOTk8lMkJyZ0c3ajEzTGl3cnN4OVdyTnpMaCUyQlZaQXYzQjUxaSUyRlFHcEgyb2RxOWlhYmQ4MzhhUGlPR1QlMkJQMjRSWlVNMG1aWVRBQkJtaFJoUHRsZ3NZVlM3SXVOMGZqZmx4cVRWbzBWUGpXZXRObGdScWpVN2ZxeHdMSnVIU25CYW8wMXhidm9PR29iJTJCR3Z0a0NRd0ZqUEF2RzFqJTJGZXRhc3REaGRXRkFZTVVabm1PUFR1dXljWDYlMkZLRWFnVmtsMExnUUc0QVNkSjlma1ZWdUE2clVxYSUyRlhjaHVtcGlnZG1lSTIzTVh4Wlc0SGNJSzREMjVyeEczZUE3ZERxJTJCNEN6S1NGaDRqWE9vNUtSNGFvN1dO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TSRkNd+q+Ter+WY1bsPi5KmnnuKoo47i3XffZamlluLss8/mRz9SbaOvtyeffJI+ffrw0kvRk99nz57N6NGjOeAA5aXF2/Sy1Dsz3l5j7c3iJFac8+8syw/N1F/mjpyk8ER9NUSlnitHTlJ7rhw5qQP1BhtswJAhQ+jbty8SIFtttRVvvvkm7du3/1ovjYiTJ554gl/84hfceWf8J5pbnMzfyQ7P1vHwN3FpJpwtTprwWH23WpzUx6vRq7P8sE79y0UoArOKYGQ1bkORExm76KKL8s4779CpU6fg+dKfEyZMYP311/+GONlnn33o3bs3v//971l88cUZPnw43bp1Y5VVVuGVV15hxRVXDO4ZNGgQn376KbfddhvTpk1js80249577+VPf/pTIFY+//xz1lprLa6++mpWXnnlhp5rixOLk8p9w7U4aehd0chNFieNUKv/HouT+pk1coee50KJE01yu+22Y++99w6WdiZOnMhBBx3E888/H4iWlk2Rkx49egSCpF+/flx//fUMHTqUF154IRAs6ueYY3RaOYHwGDlyJG+88QZXXXVVEDmRAJLgkfBRtOb888/nwQcfZNy4cY2wDsKuXtb5JrpMvtFn/I0gq29AqY9rcdLQu6KRmyxOGqFW/z0WJ/Uza+SOQoqTp59+mm222Sb4sP/oo48YNWoUe+yxxzfmL3HSq1cvPvzwQ9q1a8dnn33GkksuGeSqKCpy0UUX8be//S1YGtp999159dVXGTt27Fxx8tvf/jbo+4477gj61lgdOnQIIizqr95mceLIiSMn9f7WNH59lh/WWX3jS118Zpz7kdV8q+bfrOab1bgNLetIGCiaccUVV7Djjjvy3HPPBULlgQceYPz48Zx++unB2+yUU07hBz/4QSA6XnvttblvuKWXXjoQI1rWWWmllYL/V0Rl5syZnHPOOYwZM2auODnvvPM47bTT5i4fqRMJnX/961/BvfU2ixOLE4uTen9rGr/e4qRxdvXcmWXk0+KkHk81dm2WkaJCiRMlrO6yyy689dZbc0nvsMMOHHjggey1117MmDEj+PtlllmGF198MUiW/eCDD4Ioi/JGllhiCaZMmULHjh358Y9/HCzXaDnn2muvZdNNN/2aOLnxxhuDn//4xz825tV57rI4sTixOInlVylSJxYnkTA1fZHFSdMII3VQxee5UOJEQmO1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gAmYgAmkRcDiJC3SHscETMAETMAETCASAYuTSJh8kQmYgAmYgAmYQFoELE7SIu1xTMAETMAETMAEIhGwOImEyReZgAmYgAmYgAmkRcDiJC3SHscETMAETMAETCASAYuTSJh8kQmYgAmYgAmYQFoELE7SIu1xTMAETMAETMAEIhGwOImEyReZgAmYgAmYgAmkRcDiJC3SHscETMAETMAETCASAYuTSJh8kQmYgAmYgAmYQFoELE7SIh19nDnRL/WVJmACJmACJlA+AhYn+fPpnEE3/TR/VpXMovMPuIQ5c6wDk3ZrmzZtzDlpyIA4+72RPGi9N8w5Hc4WJ8lzrncEi5N6iTVwvcVJA9AauMXipAFoDdxicdIAtAZusThpAFoDt4izxUkD4BK+xeIkYcDq3uIkBcjhN3pHqJJnbXGSPOPae8ORk+RZ1y1ObrnlFk488UTefvttNtxwQ0aMGMF3v/vdr1l62mmnccUVV/DOO+/MdwbLLbcczzzzDKuuumrkGV533XUccsghka9f2IX6JdY7M5bOkunE4iQZrl/r1eIkBcgWJ+lA9rJOapwdOUkHdV3i5M0336Rr167ccccdbLbZZpxyyilMmjSJ++67b661L7zwAr179+aDDz6ITZzoW9fKK6+8wP7qRWVxUi+xcl5vcZKOX72skx5nf6NPnrXFSfKMaxGqyMs6Eid///vf2WuvvQLrnnjiiUCIvP7663Ot3WabbTjyyCM55phjFipOhgwZwvDhw/noo484/vjjOe644+jevTsnnXQSffr0Cfq77bbbAgG0xhproIhNly5dAmE0c+ZMDj/88KD/9u3bc/HFF7PFFltEJmZxEhlVqS+0OEnHvRYn6XG2OEmetcVJ8ozrFifzmnTOOefw1FNPcdNNNwX/dP311wdRlPPPP58NNthgoeJkn332CcTJSy+9FCwPPf/884wZM4aJEycybty4oL/+/fuz7rrrMmDAgGAJ6NNPPw3+fpNNNuGoo47isMMO45FHHmGPPfbglVdeYbHFFotEzeIkEqbSX2Rxko6LLU7S42xxkjxri5PkGTclTu666y6OPvpoJkyYwHe+8x2mTp1Kr169gp/VWhMnul9LQ2qKeihyoj/XWWcd3nrrrSAistJKKwWRmmWXXXauOJk8eXIQQZk+fTpt27YN7u/RowfnnXceW221VSRqFieRMJX+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EzABEzCBwhGwOCmcy2ywCZiACZiACZSbgMVJuf3r2ZmACZiACZhA4QhYnBTOZTbYBEzABEzABMpNwOKk3P717EzABEzABEygcAQsTgrnMhtsAiZgAiZgAuUmYHFSbv96diZgAiZgAiZQOAIWJ4VzmQ02ARMwARMwgXITsDgpt389OxMwARMwARMoHAGLk8K5zAabgAmYgAmYQLkJWJyU27+enQmYgAmYgAkUjoDFSeFcZoNNwARMwARMoNwELE7K7V/PzgRMwARMwAQKR8DipHAus8EmYAImYAImUG4CFifl9q9nZwImYAImYAKFI2Bxkr7LBgHDgRnpD+0RTcAETMAETCD/BCxO0vfRTKAtcAHwa4uU9B3gEU3ABEzABPJNwOIkff8MBM4KBcqcUKScaZGSviM8ogmYgAmYQD4JWJxk45epQMdw6M8BiZQLgaHAR9mY5FFNwARMwARMIB8EqipO8kH/61bMAm4F+uTRONtkAiZgAiZgAmkRqKo40byzbFOA5ecTOXEOSpZe8dgmYAImYAK5IGBxkr4blHOiHJN24XLOsDAxdnr6pnhEEzABEzABE8gfgdTEyciRI9l2221ZccUVuf/+++nQoQPdunXjww8/ZOzYsfTv3z8VOm3aBEGTLCMn2q0jYVLbrWNRkornPYgJmIAJmEBRCKQmTlZaaSXGjBlDr1696Nu3LxtssAFDhgzhueeeC/5/9uzZqTDLgThRnZMRgEVJKh73ICZgAiZgAkUjkJo4yQuYHIiTvKCwHSZgAiZgAiaQSwIWJ7l0i40yARMwARMwgeoSsDipru89cxMwARMwARPIJQGLk1y6xUaZgAmYgAmYQHUJWJxU1/eeuQmYgAmYgAnkkoDFSS7dYqNMwARMwARMoLoELE6q63vP3ARMwARMwARyScDiJJdusVEmYAImYAImUF0CFifV9b1nbgImYAImYAK5JGBxkku32CgTMAETMAETqC4Bi5Pq+t4zNwETMAETMIFcErA4yaVbbJQJmIAJmIAJVJeAxUl1fe+Zm4AJmIAJmEAuCVic5NItNsoETMAETMAEqkvA4qS6vvfMTcAETMAETCCXBCxOcukWG2UCJmACJmAC1SVgcVJd33vmJmACJmACJpBLAhYnuXSLjTIBEzABEzCB6hKwOKmu7z1zEzABEzABE8glAYuTXLrFRpmACZiACZhAdQlYnFTX9565CZiACZiACeSSgMVJLt1io0zABEzABEygugQsTqrre8/cBEzABEzABHJJwOIkl26xUSZgAiZgAiZQXQIWJ9X1vWduAiZgAiZgArkkYHGSS7fYKBMwARMwAROoLgGLk+r63jM3ARMwARMwgVwSsDjJpVtslAmYgAmYgAlUl4DFSXV975mbgAmYgAmYQC4JWJzk0i02ygRMwARMwASqS8DipLq+98xNwARMwARMIJcELE5y6RYbZQImYAImYALVJWBxUl3fe+YmYAImYAImkEsCFie5dIuNMgETMAETMIHqErA4qa7vPXMTMAETMAETyCUBi5NcusVGmYAJmIAJmEB1CVicVNf3nrkJmIAJmIAJ5JKAxUku3WKjTMAETMAETKC6BCxOqut7z9wETMAETMAEcknA4iSXbrFRJmACJmACJlBdAoE4qeD0NW83EzABEzABEzCBHBL4/+kenMA+TX+ZAAAAAElFTkSuQmCC" /></p>
+<p><strong>Intuition</strong></p>
+<p>Dynamic memory allocation allows programs to request memory from the heap during runtime. This is essential when the amount of memory required cannot be determined at compile-time. It provides flexibility to allocate and deallocate memory as needed, which is particularly useful for managing data structures like linked lists, trees, and other complex data structures.</p>
+<p>In languages like C and C++, dynamic memory allocation is performed using functions like <code class="docutils literal notranslate"><span class="pre">malloc</span></code>, <code class="docutils literal notranslate"><span class="pre">calloc</span></code>, and <code class="docutils literal notranslate"><span class="pre">free</span></code> from the standard library. This allows the programmer to manage memory manually. In Python, memory management is handled automatically, but understanding the concept of dynamic memory allocation is still useful for working with data structures that grow and shrink in size.</p>
+<p><strong>Example: Allocating and Freeing Memory Dynamically</strong></p>
+<p>Dynamic memory allocation involves the following steps:</p>
+<p>Allocation: Requesting a block of memory from the heap.
+Usage: Using the allocated memory for storing data.
+Deallocation: Releasing the allocated memory back to the heap once it’s no longer needed to avoid memory leaks.
+For example, in C, you can allocate memory for an array and later free it once done. Let’s see how we can implement a linked list in C using dynamic memory allocation.</p>
+<p><strong>Code: Implementing Linked Lists Using Pointers</strong></p>
+<p>Here’s a simple C program to implement a singly linked list using dynamic memory allocation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the Node class</span>
+<span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Define the LinkedList class</span>
+<span class="k">class</span> <span class="nc">LinkedList</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Function to insert a new node at the end of the list</span>
+    <span class="k">def</span> <span class="nf">insert_at_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">new_node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="n">new_node</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+            <span class="k">while</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+            <span class="n">current</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">new_node</span>
+
+    <span class="c1"># Function to print the linked list</span>
+    <span class="k">def</span> <span class="nf">print_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">head</span>
+        <span class="k">while</span> <span class="n">current</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">current</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; -&gt; &quot;</span><span class="p">)</span>
+            <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">.</span><span class="n">next</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;None&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Function to free the linked list (not strictly necessary in Python)</span>
+    <span class="k">def</span> <span class="nf">free_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">head</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Dereference all nodes; garbage collector will clean up</span>
+
+<span class="c1"># Main function to demonstrate the linked list</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># Create a linked list</span>
+    <span class="n">linked_list</span> <span class="o">=</span> <span class="n">LinkedList</span><span class="p">()</span>
+
+    <span class="c1"># Insert elements into the linked list</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">insert_at_end</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">insert_at_end</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">insert_at_end</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+    <span class="c1"># Print the linked list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linked list: &quot;</span><span class="p">)</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">print_list</span><span class="p">()</span>
+
+    <span class="c1"># Free the linked list</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">free_list</span><span class="p">()</span>
+
+    <span class="c1"># Print the linked list after freeing it</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Linked list after freeing: &quot;</span><span class="p">)</span>
+    <span class="n">linked_list</span><span class="o">.</span><span class="n">print_list</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linked list: 
+10 -&gt; 20 -&gt; 30 -&gt; None
+Linked list after freeing: 
+None
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Explanation:</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Node</span></code> class represents an element in the linked list. Each node contains data and a reference (next) to the next node.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">LinkedList</span></code> class initializes an empty list with the head set to None.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">insert_at_end</span></code> method creates a new node and inserts it at the end of the list. If the list is empty, the new node becomes the head. Otherwise, it traverses to the end and links the new node.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">print_list</span></code> method traverses the list from the head, printing each node’s data until the end of the list is reached.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">free_list</span></code> method sets the head to None, effectively clearing the list by removing references to all nodes. Python’s garbage collector will automatically reclaim the memory.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">main</span></code> function creates a linked list, inserts three elements, prints the list, frees the list, and then prints the list again to show it is empty.</p>
+<p><strong>Текст, выделенный полужирным шрифтом</strong># Новый раздел</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusion-and-next-step">
+<h1>Conclusion and Next Step<a class="headerlink" href="#conclusion-and-next-step" title="Link to this heading">#</a></h1>
+<p>In this exercise, we have explored the concepts of dynamic memory allocation and linked lists through implementations in both C and Python. We covered the following key points:</p>
+<p>Dynamic Memory Allocation:</p>
+<ul class="simple">
+<li><p>Learned how to allocate and free memory dynamically, which is crucial for efficient memory management in languages like C and C++ and for implementing data structures that can grow and shrink as needed.</p></li>
+</ul>
+<p>Linked List Implementation:</p>
+<ul class="simple">
+<li><p>C Implementation: Used malloc and free to manage memory manually, demonstrating the creation, insertion, traversal, and deletion of nodes in a singly linked list.</p></li>
+<li><p>Python Implementation: Despite Python abstracting memory management, we simulated dynamic memory allocation by creating a LinkedList class that includes methods for inserting nodes, printing the list, and clearing the list.</p></li>
+</ul>
+<p>Next Steps
+To further solidify your understanding and expand your skills, consider the following steps:</p>
+<p>Extend the Linked List:</p>
+<ul class="simple">
+<li><p>C: Implement additional functions such as inserting nodes at specific positions, deleting nodes, and reversing the list.</p></li>
+<li><p>Python: Add similar methods to your LinkedList class, and explore implementing doubly linked lists for more complex operations.</p></li>
+</ul>
+<p>Understand Memory Management in Other Languages:</p>
+<ul class="simple">
+<li><p>Explore how other programming languages handle memory management, such as Java’s garbage collection and Rust’s ownership model.</p></li>
+</ul>
+<p>Advanced Data Structures:</p>
+<ul class="simple">
+<li><p>Implement more complex data structures like binary trees, hash tables, and graphs using dynamic memory allocation in C.</p></li>
+<li><p>In Python, leverage built-in data structures and modules but also try implementing them manually to deepen your understanding.</p></li>
+</ul>
+<p>Algorithm Optimization:</p>
+<ul class="simple">
+<li><p>Study common algorithms used with linked lists, such as searching, sorting, and merging lists, and implement them in both C and Python.</p></li>
+<li><p>Analyze the time and space complexity of these algorithms.</p></li>
+</ul>
+<p>Memory Management Techniques:</p>
+<ul class="simple">
+<li><p>Learn about advanced memory management techniques such as memory pools, custom allocators, and reference counting.</p></li>
+</ul>
+<p>Concurrency and Multithreading:</p>
+<ul class="simple">
+<li><p>Investigate how dynamic memory allocation and linked lists are used in concurrent programming and multithreading, ensuring thread-safe operations.</p></li>
+</ul>
+<p>Further Reading and Practice
+Books:</p>
+<ul class="simple">
+<li><p>“The C Programming Language” by Brian W. Kernighan and Dennis M. Ritchie</p></li>
+<li><p>“Data Structures and Algorithms in Python” by Michael T. Goodrich, Roberto Tamassia, and Michael H. Goldwasser</p></li>
+</ul>
+<p>Online Resources:</p>
+<ul class="simple">
+<li><p>Practice problems on platforms like LeetCode, HackerRank, and CodeSignal.</p></li>
+<li><p>Tutorials and documentation on memory management in languages like C, C++, Python, and Rust.</p></li>
+</ul>
+<p>Courses:</p>
+<ul class="simple">
+<li><p>Enroll in online courses or MOOCs focused on data structures and algorithms, such as those offered by Coursera, edX, and Udacity.</p></li>
+</ul>
+<p>By following these steps and continuing to practice and experiment, you’ll develop a deeper understanding of dynamic memory allocation, linked lists, and other fundamental concepts in computer science.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Chapter 4</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Chapter6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><strong>Data Structures: Trees and Graphs</strong></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Chapter: Arrays and Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-arrays-and-pointers">Introduction to Arrays and Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-array-basics">Concept 1: Array Basics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-multi-dimensional-arrays">Concept 2: Multi-dimensional Arrays</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1">Problem 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2">Problem 2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3">Problem 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-3-understanding-pointers">Concept 3: Understanding Pointers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-4-dynamic-memory-allocation">Concept 4: Dynamic Memory Allocation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-and-next-step">Conclusion and Next Step</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

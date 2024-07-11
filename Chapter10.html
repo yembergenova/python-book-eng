@@ -1,0 +1,1006 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>10. Dynamic programming &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter10';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="10. Recursion, Backtracking, Recurrence Relations" href="Chapter9.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Chapter1.html">Brief History of Python programming language.</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter2.html"><strong>Report Final. Algorithms</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter3.html">Table of contents</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter4.html">Chapter 4</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter5.html">Chapter: Arrays and Pointers</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Chapter6.html"><strong>Data Structures: Trees and Graphs</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter7.html"><strong>Chapter: Graph Traversals</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter8.html">Graph Shortest Paths</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chapter9.html">10. Recursion, Backtracking, Recurrence Relations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. Dynamic programming</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FChapter10.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Chapter10.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10. Dynamic programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-dynamic-programming">10.1 About Dynamic programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-fibonacci-sequence">10.2 Concept 1: Fibonacci Sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">10.2.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">10.2.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">10.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-knapsack-problem">10.3 Concept 2: Knapsack problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">10.3.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.3.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-dynamic-programming">10.4 LeetCode Problems related to “Dynamic programming”</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-climbing-stairs">10.4.1 Problem 1: Climbing Stairs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">10.4.1.1 Problem statement</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.4.1.2 Intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.4.1.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-house-robber">10.4.2 Problem 2: House Robber</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.4.2.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.4.2.1 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-coin-change">10.4.3 Problem 3: Coin Change</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.4.3.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.4.3.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.4.3.3 Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">10.5 Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read-next">10.6 What to read next</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memoization-vs-tabulation">1. Memoization vs Tabulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence-lcs">2. Longest Common Subsequence (LCS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-distance">3. Edit Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-on-trees">4. Dynamic Programming on Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-subarray-problem">5. Maximum Subarray Problem</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="dynamic-programming">
+<h1>10. Dynamic programming<a class="headerlink" href="#dynamic-programming" title="Link to this heading">#</a></h1>
+<section id="about-dynamic-programming">
+<h2>10.1 About Dynamic programming<a class="headerlink" href="#about-dynamic-programming" title="Link to this heading">#</a></h2>
+<p>Dynamic programming (DP) is a method used in algorithm design to solve problems by breaking them down into simpler subproblems and solving each subproblem just once, storing its solution. This technique is particularly useful for problems with overlapping subproblems and optimal substructure, meaning the solution to the problem can be composed of solutions to its subproblems. By storing the solutions to these subproblems, DP avoids redundant calculations, significantly improving efficiency.</p>
+<p>There are two main approaches to dynamic programming: the top-down approach, known as memoization, and the bottom-up approach, known as tabulation. In memoization, the problem is solved recursively, and results of solved subproblems are stored for future use. In tabulation, the problem is solved iteratively, building up solutions from the smallest subproblems to the overall problem. Both approaches help transform exponential time complexity problems into polynomial time complexity problems.</p>
+<p>Dynamic programming is widely used to solve various algorithmic problems such as the Fibonacci sequence, the knapsack problem, and the longest common subsequence. These problems benefit from the efficiency and optimal solutions provided by DP, making it a fundamental technique in computer science for tackling complex computational challenges.</p>
+<p>And in this chapter we will consider two concepts of DP and three LeetCode problems for better understanding.</p>
+<img src="assets/dynamic-programming.png" alt="DynamicProgrammingImage"/></section>
+<hr class="docutils" />
+<section id="concept-1-fibonacci-sequence">
+<h2>10.2 Concept 1: Fibonacci Sequence<a class="headerlink" href="#concept-1-fibonacci-sequence" title="Link to this heading">#</a></h2>
+<section id="intuition">
+<h3>10.2.1 Intuition<a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<p>The Fibonacci sequence is a perfect example to illustrate dynamic programming. The nth Fibonacci number is the sum of the (n-1)th and (n-2)th Fibonacci numbers. In a naive recursive approach, the same subproblems are solved multiple times, leading to an exponential time complexity. Dynamic programming optimizes this by storing the results of subproblems and reusing them when needed.</p>
+<p><strong>Steps to Solve Fibonacci Sequence Using Dynamic Programming:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Identify the Base Cases:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>The first two Fibonacci numbers are given: F(0) = 0 and F(1) = 1.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Define the Recurrence Relation:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>For n &gt; 1, F(n) = F(n-1) + F(n-2).</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Store the Results of Subproblems:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Use an array or list to store the Fibonacci numbers up to the nth number.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Build the Solution Bottom-Up:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Start from the base cases and use the recurrence relation to fill up the array until you reach the nth number.</p></li>
+</ul>
+<p>It is defined as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F(0)</span> <span class="pre">=</span> <span class="pre">0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F(1)</span> <span class="pre">=</span> <span class="pre">1</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">F(n)</span> <span class="pre">=</span> <span class="pre">F(n-1)</span> <span class="pre">+</span> <span class="pre">F(n-2)</span> <span class="pre">for</span> <span class="pre">n</span> <span class="pre">&gt;</span> <span class="pre">1</span></code></p></li>
+</ul>
+<p>The 0 and 1 are the default values that starts the Fibonacci Sequence. And after that come the last two elements. And so on until the assigned number.</p>
+<img src="assets/FIBONACCI-SERIES.png" alt="GeeksForGeeksFibonacciSequenceImage"/></section>
+<section id="example">
+<h3>10.2.2 Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<p>Let’s look at the step-by-step visualization of how the code works for n = 10:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">2</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1]</span></code> (1 + 0)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">3</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2]</span></code> (1 + 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">4</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> (2 + 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">5</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5]</span></code> (3 + 2)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">6</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8]</span></code> (5 + 3)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">7</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13]</span></code> (8 + 5)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">8</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21]</span></code> (13 + 8)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">9</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21,</span> <span class="pre">34]</span></code> (21 + 13)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">=</span> <span class="pre">10</span></code>: <code class="docutils literal notranslate"><span class="pre">fib</span> <span class="pre">=</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">5,</span> <span class="pre">8,</span> <span class="pre">13,</span> <span class="pre">21,</span> <span class="pre">34,</span> <span class="pre">55]</span></code> (34 + 21)</p></li>
+</ul>
+<p>So the result to the 10th Fibonacci’s number is <strong>55</strong>.</p>
+<img src="assets/fibonacci_terms.gif" alt="fibonacciTermsImage"/>
+</section>
+<section id="code">
+<h3>10.2.3 Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="n">fib</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">fib</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fib</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">fib</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fibonacci</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Output: 55</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>55
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="concept-2-knapsack-problem">
+<h2>10.3 Concept 2: Knapsack problem<a class="headerlink" href="#concept-2-knapsack-problem" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>10.3.1 Intuition<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>In the Knapsack problem, the goal is to maximize the value of items that can be placed in a knapsack of limited capacity. A naive recursive approach would involve trying all possible subsets of items, which leads to an exponential time complexity. Dynamic programming optimizes this by breaking the problem into smaller subproblems and storing the results to avoid redundant calculations.</p>
+<p><strong>Steps to Solve the Knapsack Problem Using Dynamic Programming:</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Identify the Base Cases:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>When there are no items or the capacity of the knapsack is 0, the maximum value is 0.</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Define the Recurrence Relation:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>For each item, decide whether to include it in the knapsack or not. The value of the knapsack at a given capacity is the maximum of these two choices:
+* Include the item: Add its value to the value of the remaining capacity.
+* Exclude the item: The value remains the same as without the item.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Store the Results of Subproblems:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Use a 2D array to store the maximum value for each item and each capacity.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Build the Solution Bottom-Up:</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Start from the smallest subproblems (e.g., no items or zero capacity) and use the recurrence relation to fill up the array until the full problem is solved.</p></li>
+</ul>
+</section>
+<section id="id2">
+<h3>10.3.2 Example<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>Given weights and values of 𝑛 items, put these items in a knapsack of capacity 𝑊 to get the maximum total value in the knapsack.</p>
+<img src="assets/Knapsack Problem.png" alt="Knapsack problem image"/></section>
+<section id="id3">
+<h3>10.3.3 Code<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">knapsack</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">wt</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">W</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">w</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">elif</span> <span class="n">wt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">w</span><span class="p">:</span>
+                <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">w</span><span class="o">-</span><span class="n">wt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">w</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">w</span><span class="p">]</span> <span class="o">=</span> <span class="n">K</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">w</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">K</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="n">W</span><span class="p">]</span>
+
+<span class="c1"># Test</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">capacity</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">knapsack</span><span class="p">(</span><span class="n">capacity</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>  <span class="c1"># Output: 50</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="leetcode-problems-related-to-dynamic-programming">
+<h2>10.4 LeetCode Problems related to “Dynamic programming”<a class="headerlink" href="#leetcode-problems-related-to-dynamic-programming" title="Link to this heading">#</a></h2>
+<section id="problem-1-climbing-stairs">
+<h3>10.4.1 Problem 1: Climbing Stairs<a class="headerlink" href="#problem-1-climbing-stairs" title="Link to this heading">#</a></h3>
+<section id="problem-statement">
+<h4>10.4.1.1 Problem statement<a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h4>
+<p>You are climbing a staircase. It takes 𝑛 steps to reach the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?</p>
+<p>It is the 70th problem on LeetCode. <a class="reference external" href="https://leetcode.com/problems/climbing-stairs/description/">Here</a> is the link.</p>
+</section>
+</section>
+<section id="id4">
+<h3>10.4.1.2 Intuition<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>This problem can be broken down into smaller subproblems, similar to the Fibonacci sequence.</p>
+<section id="id5">
+<h4>10.4.1.3 Code<a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">climbStairs</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+
+    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">climbStairs</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: 8</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-2-house-robber">
+<h3>10.4.2 Problem 2: House Robber<a class="headerlink" href="#problem-2-house-robber" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h4>10.4.2.1 Problem statement<a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and <strong>it will automatically contact the police if two adjacent houses were broken into on the same night</strong>.</p>
+<p>Given an integer array <code class="docutils literal notranslate"><span class="pre">nums</span></code> representing the amount of money of each house, return <em>the maximum amount of money you can rob tonight</em> <strong>without alerting the police</strong>.</p>
+<p>It is the 198th problem on LeetCode. <a class="reference external" href="https://leetcode.com/problems/house-robber/description/">Here</a> is the link.</p>
+</section>
+<section id="id7">
+<h4>10.4.2.1 Intuition<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<p>This problem can be solved using dynamic programming by deciding whether to rob each house or not based on the maximum money that can be robbed up to that point.</p>
+</section>
+<section id="id8">
+<h4>10.4.2.3 Code<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">rob</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">nums</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nums</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
+        <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rob</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># Output: 12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="problem-3-coin-change">
+<h3>10.4.3 Problem 3: Coin Change<a class="headerlink" href="#problem-3-coin-change" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h4>10.4.3.1 Problem statement<a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<p>You are given an integer array <code class="docutils literal notranslate"><span class="pre">coins</span></code> representing coins of different denominations and an integer <code class="docutils literal notranslate"><span class="pre">amount</span></code> representing a total amount of money.</p>
+<p>Return <em>the fewest number of coins that you need to make up that amount</em>. If that amount of money cannot be made up by any combination of the coins, return <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p>
+<p>You may assume that you have an infinite number of each kind of coin.</p>
+<p>It is the 322nd problem on LeetCode. <a class="reference external" href="https://leetcode.com/problems/coin-change/description/">Here</a> is the link.</p>
+</section>
+<section id="id10">
+<h4>10.4.3.2 Intuition<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<p>This problem can be solved using dynamic programming by iteratively finding the minimum coins required for each amount up to the target.</p>
+</section>
+<section id="id11">
+<h4>10.4.3.3 Code<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coinChange</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+    <span class="n">dp</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)]</span> <span class="o">*</span> <span class="p">(</span><span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">dp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">coin</span> <span class="ow">in</span> <span class="n">coins</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">coin</span><span class="p">,</span> <span class="n">amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="n">coin</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="k">if</span> <span class="n">dp</span><span class="p">[</span><span class="n">amount</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1"># Test</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coinChange</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="mi">11</span><span class="p">))</span>  <span class="c1"># Output: 3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="conclusion">
+<h2>10.5 Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Dynamic programming is a powerful and versatile technique for solving complex problems by breaking them down into simpler subproblems and storing their solutions to avoid redundant computations. Throughout this chapter, we have explored fundamental concepts and applications of dynamic programming through a variety of problems and examples.</p>
+<p><strong>Previously Studied Materials Recap:</strong></p>
+<ul class="simple">
+<li><p><strong>Fibonacci Sequence:</strong> This classic problem introduced us to the basic principles of dynamic programming, demonstrating how to efficiently compute the n-th Fibonacci number using memoization and tabulation.</p></li>
+<li><p><strong>Climbing Stairs:</strong> This problem extended the idea of the Fibonacci sequence, where we calculated the number of distinct ways to climb a staircase with a given number of steps.</p></li>
+<li><p><strong>Knapsack Problem:</strong> This optimization problem illustrated how to make the most of limited resources, teaching us the importance of state representation and transition.</p></li>
+<li><p><strong>Coin Change:</strong> Through this problem, we learned how to determine the minimum number of coins needed to make a specific amount, emphasizing the use of a bottom-up approach.</p></li>
+<li><p><strong>House Robber:</strong> This problem showed how to maximize profit under constraints, highlighting the value of considering non-adjacent elements in our state transitions.</p></li>
+</ul>
+<p>If you want to pursue the field of dynamic programming, you can still consider and solve problems such as:</p>
+<ul class="simple">
+<li><p>Unique Paths</p></li>
+<li><p>Longest Increasing Subsequence</p></li>
+<li><p>Palindrome Partitioning II</p></li>
+</ul>
+<p>All those problems you can find in LeetCode.</p>
+</section>
+<hr class="docutils" />
+<section id="what-to-read-next">
+<h2>10.6 What to read next<a class="headerlink" href="#what-to-read-next" title="Link to this heading">#</a></h2>
+<p>After mastering the basics of dynamic programming through problems like the Fibonacci sequence, climbing stairs, the knapsack problem, coin change, and house robber, it’s important to expand your knowledge and delve deeper into more advanced topics. These concepts build on the foundation you’ve established and introduce new techniques and applications of dynamic programming. By exploring the following topics, you’ll gain a more comprehensive understanding of how to approach and solve a wider variety of problems using dynamic programming.</p>
+<section id="memoization-vs-tabulation">
+<h3>1. Memoization vs Tabulation<a class="headerlink" href="#memoization-vs-tabulation" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Understanding the difference between memoization and tabulation is crucial for mastering dynamic programming. Both are techniques used to optimize recursive algorithms by storing the results of subproblems:</p>
+<ul class="simple">
+<li><p><strong>Memoization:</strong> A top-down approach where you solve the problem recursively and store the results of subproblems in a data structure (usually a dictionary or array) to avoid redundant calculations.</p></li>
+<li><p><strong>Tabulation:</strong> A bottom-up approach where you iteratively solve all possible subproblems and store the results in a table (usually an array), filling it in a systematic manner.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Helps in choosing the right approach based on the problem’s characteristics.</p></li>
+<li><p>Enhances understanding of different dynamic programming strategies and their applications.</p></li>
+</ul>
+</section>
+<section id="longest-common-subsequence-lcs">
+<h3>2. Longest Common Subsequence (LCS)<a class="headerlink" href="#longest-common-subsequence-lcs" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>The LCS problem is a classic dynamic programming problem that finds the longest subsequence common to two sequences. It’s fundamental for understanding how to compare and find patterns in strings:</p>
+<ul class="simple">
+<li><p><strong>Problem Statement:</strong> Given two sequences, find the length of their longest common subsequence.</p></li>
+<li><p><strong>Applications:</strong> Text comparison, DNA sequence analysis, file difference utilities.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Introduces concepts of sequence alignment and comparison.</p></li>
+<li><p>Provides a deeper understanding of dynamic programming applied to string problems.</p></li>
+</ul>
+</section>
+<section id="edit-distance">
+<h3>3. Edit Distance<a class="headerlink" href="#edit-distance" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>The Edit Distance problem measures how dissimilar two strings are by counting the minimum number of operations required to transform one string into the other. It’s a vital problem in dynamic programming with many practical applications:</p>
+<ul class="simple">
+<li><p><strong>Problem Statement:</strong> Given two strings, find the minimum number of operations (insertions, deletions, substitutions) needed to convert one string into the other.</p></li>
+<li><p><strong>Applications:</strong> Spell checking, DNA sequence alignment, natural language processing.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Enhances understanding of dynamic programming in the context of text transformation and alignment.</p></li>
+<li><p>Demonstrates the practical utility of dynamic programming in real-world applications.</p></li>
+</ul>
+</section>
+<section id="dynamic-programming-on-trees">
+<h3>4. Dynamic Programming on Trees<a class="headerlink" href="#dynamic-programming-on-trees" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>Dynamic programming on trees involves applying DP techniques to tree data structures. This is essential for solving problems where the structure of the input data is hierarchical:</p>
+<ul class="simple">
+<li><p><strong>Problem Statement:</strong> Solve optimization problems where the input is represented as a tree (e.g., finding the maximum path sum in a tree).</p></li>
+<li><p><strong>Applications:</strong> Network design, organizational hierarchy optimization, computational biology.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Expands the application of dynamic programming to non-linear data structures.</p></li>
+<li><p>Provides insight into solving complex hierarchical problems efficiently.</p></li>
+</ul>
+</section>
+<section id="maximum-subarray-problem">
+<h3>5. Maximum Subarray Problem<a class="headerlink" href="#maximum-subarray-problem" title="Link to this heading">#</a></h3>
+<p><strong>Why Read This?</strong></p>
+<p>The Maximum Subarray Problem is another classic problem in dynamic programming that finds the contiguous subarray within a one-dimensional array with the maximum sum:</p>
+<ul class="simple">
+<li><p><strong>Problem Statement:</strong> Given an array of integers, find the contiguous subarray with the maximum sum.</p></li>
+<li><p><strong>Applications:</strong> Financial analysis (e.g., finding the period with the maximum profit), signal processing.</p></li>
+</ul>
+<p><strong>Importance:</strong></p>
+<ul class="simple">
+<li><p>Demonstrates a simple yet powerful application of dynamic programming.</p></li>
+<li><p>Helps in understanding how to handle and optimize problems involving arrays and sequences.</p></li>
+</ul>
+<p>Exploring these topics after learning the basics of dynamic programming will deepen your understanding and equip you with the skills to tackle a wider range of problems. Each of these topics represents a different type of problem or application where dynamic programming can be effectively utilized, helping you build a strong foundation in both theory and practical applications.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Chapter9.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">10. Recursion, Backtracking, Recurrence Relations</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-dynamic-programming">10.1 About Dynamic programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-1-fibonacci-sequence">10.2 Concept 1: Fibonacci Sequence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">10.2.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">10.2.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">10.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-2-knapsack-problem">10.3 Concept 2: Knapsack problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">10.3.1 Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">10.3.2 Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">10.3.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#leetcode-problems-related-to-dynamic-programming">10.4 LeetCode Problems related to “Dynamic programming”</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-1-climbing-stairs">10.4.1 Problem 1: Climbing Stairs</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement">10.4.1.1 Problem statement</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">10.4.1.2 Intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">10.4.1.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-2-house-robber">10.4.2 Problem 2: House Robber</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">10.4.2.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">10.4.2.1 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">10.4.2.3 Code</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-3-coin-change">10.4.3 Problem 3: Coin Change</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">10.4.3.1 Problem statement</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">10.4.3.2 Intuition</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">10.4.3.3 Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">10.5 Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-to-read-next">10.6 What to read next</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#memoization-vs-tabulation">1. Memoization vs Tabulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#longest-common-subsequence-lcs">2. Longest Common Subsequence (LCS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#edit-distance">3. Edit Distance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-programming-on-trees">4. Dynamic Programming on Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maximum-subarray-problem">5. Maximum Subarray Problem</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
